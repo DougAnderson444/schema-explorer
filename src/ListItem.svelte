@@ -4,7 +4,7 @@
     onMount(() => {
         document.querySelectorAll("a").forEach((a) => {
             if (!a.hash || !document.querySelectorAll(a.hash).length) return;
-            a.href = window.location.origin + window.location.pathname + a.hash;
+            // a.href = window.location.origin + window.location.pathname + a.hash;
         });
     });
 
@@ -53,7 +53,6 @@
     }
 </script>
 
-<!-- <li class="list-group-item"> -->
 <!-- {#each hit.chunks as chunk, i}
         {#if chunk.highlight}
             <strong key={i}>{@html format(chunk.text)}</strong>
@@ -91,7 +90,7 @@
             {#each links as link}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#"
+                    href="{window.location.pathname}#"
                     class="card-link badge badge-primary text-light"
                     on:click={() => (input = formatTitle(link))}
                     >{formatTitle(link)}</a
@@ -114,7 +113,7 @@
             {#each rangeIncludes as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#"
+                    href="{window.location.pathname}#"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -127,7 +126,7 @@
             {#each [...Object.entries(subClassOf)] as [key, value]}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#"
+                    href="{window.location.pathname}#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -140,7 +139,7 @@
             {#each subClassOf as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#"
+                    href="{window.location.pathname}#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -149,4 +148,3 @@
         {/if}
     </div>
 </div>
-<!-- </li> -->
