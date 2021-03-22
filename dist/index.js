@@ -789,7 +789,7 @@
     	return child_ctx;
     }
 
-    // (85:12) {:else}
+    // (86:12) {:else}
     function create_else_block(ctx) {
     	let html_tag;
     	let html_anchor;
@@ -883,7 +883,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     		},
     		m(target, anchor) {
     			insert(target, a, anchor);
@@ -938,7 +938,7 @@
     	};
     }
 
-    // (89:8) {#if links}
+    // (90:8) {#if links}
     function create_if_block_4(ctx) {
     	let each_1_anchor;
     	let each_value_4 = /*links*/ ctx[2];
@@ -994,7 +994,7 @@
     	};
     }
 
-    // (90:12) {#each links as link}
+    // (91:12) {#each links as link}
     function create_each_block_4(ctx) {
     	let a;
     	let t_value = formatTitle(/*link*/ ctx[25]) + "";
@@ -1010,7 +1010,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-primary text-light");
     		},
     		m(target, anchor) {
@@ -1033,7 +1033,7 @@
     	};
     }
 
-    // (99:8) {#if domainIncludes && domainIncludes.length > 0}
+    // (101:8) {#if domainIncludes && domainIncludes.length > 0}
     function create_if_block_3(ctx) {
     	let each_1_anchor;
     	let each_value_3 = /*domainIncludes*/ ctx[4];
@@ -1089,7 +1089,7 @@
     	};
     }
 
-    // (100:12) {#each domainIncludes as incl}
+    // (102:12) {#each domainIncludes as incl}
     function create_each_block_3(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1105,7 +1105,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-secondary text-light");
     		},
     		m(target, anchor) {
@@ -1128,7 +1128,7 @@
     	};
     }
 
-    // (110:8) {#if rangeIncludes && rangeIncludes.length > 0}
+    // (113:8) {#if rangeIncludes && rangeIncludes.length > 0}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value_2 = /*rangeIncludes*/ ctx[5];
@@ -1184,7 +1184,7 @@
     	};
     }
 
-    // (111:12) {#each rangeIncludes as incl}
+    // (114:12) {#each rangeIncludes as incl}
     function create_each_block_2(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1200,7 +1200,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-success text-light");
     		},
     		m(target, anchor) {
@@ -1223,7 +1223,7 @@
     	};
     }
 
-    // (121:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
+    // (125:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
     function create_if_block_1$1(ctx) {
     	let each_1_anchor;
     	let each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
@@ -1279,7 +1279,7 @@
     	};
     }
 
-    // (123:12) {#each [...Object.entries(subClassOf)] as [key, value]}
+    // (127:12) {#each [...Object.entries(subClassOf)] as [key, value]}
     function create_each_block_1(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*value*/ ctx[18])) + "";
@@ -1295,7 +1295,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -1318,7 +1318,7 @@
     	};
     }
 
-    // (133:8) {#if subClassOf && subClassOf.length > 0}
+    // (138:8) {#if subClassOf && subClassOf.length > 0}
     function create_if_block$1(ctx) {
     	let each_1_anchor;
     	let each_value = /*subClassOf*/ ctx[6];
@@ -1374,7 +1374,7 @@
     	};
     }
 
-    // (135:12) {#each subClassOf as incl}
+    // (140:12) {#each subClassOf as incl}
     function create_each_block$1(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1390,7 +1390,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#click");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -41645,13 +41645,9 @@
     			t6 = space();
     			a3 = element("a");
     			a3.textContent = "Sub-Class Of";
-    			attr(a0, "href", "/#");
     			attr(a0, "class", "badge badge-primary text-light");
-    			attr(a1, "href", "/#");
     			attr(a1, "class", "badge badge-secondary text-light");
-    			attr(a2, "href", "/#");
     			attr(a2, "class", "badge badge-success text-light");
-    			attr(a3, "href", "/#");
     			attr(a3, "class", "badge badge-warning");
     		},
     		m(target, anchor) {
