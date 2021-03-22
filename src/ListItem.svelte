@@ -76,7 +76,7 @@
                     {@html comment}{#if links[i]}
                         <!-- svelte-ignore a11y-invalid-attribute -->
                         <a
-                            href="#"
+                            href="{window.location.pathname}#"
                             on:click={() => (input = formatTitle(links[i]))}
                             >{formatTitle(links[i])}</a
                         >
@@ -101,7 +101,7 @@
             {#each domainIncludes as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#"
+                    href="{window.location.pathname}#"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
