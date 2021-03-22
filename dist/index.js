@@ -880,7 +880,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     		},
     		m(target, anchor) {
     			insert(target, a, anchor);
@@ -1007,7 +1007,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-primary text-light");
     		},
     		m(target, anchor) {
@@ -1102,7 +1102,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-secondary text-light");
     		},
     		m(target, anchor) {
@@ -1197,7 +1197,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-success text-light");
     		},
     		m(target, anchor) {
@@ -1292,7 +1292,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -1387,7 +1387,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "/#");
+    			attr(a, "href", "#");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -41681,11 +41681,11 @@
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[6] = list[i];
+    	child_ctx[8] = list[i];
     	return child_ctx;
     }
 
-    // (83:1) {#if hits}
+    // (85:1) {#if hits}
     function create_if_block_1(ctx) {
     	let await_block_anchor;
     	let promise;
@@ -41699,11 +41699,11 @@
     		pending: create_pending_block_1,
     		then: create_then_block_1,
     		catch: create_catch_block_1,
-    		value: 1,
+    		value: 2,
     		blocks: [,,,]
     	};
 
-    	handle_promise(promise = /*hits*/ ctx[1], info);
+    	handle_promise(promise = /*hits*/ ctx[2], info);
 
     	return {
     		c() {
@@ -41721,9 +41721,9 @@
     			ctx = new_ctx;
     			info.ctx = ctx;
 
-    			if (dirty & /*hits*/ 2 && promise !== (promise = /*hits*/ ctx[1]) && handle_promise(promise, info)) ; else {
+    			if (dirty & /*hits*/ 4 && promise !== (promise = /*hits*/ ctx[2]) && handle_promise(promise, info)) ; else {
     				const child_ctx = ctx.slice();
-    				child_ctx[1] = info.resolved;
+    				child_ctx[2] = info.resolved;
     				info.block.p(child_ctx, dirty);
     			}
     		},
@@ -41761,15 +41761,19 @@
     	};
     }
 
-    // (84:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
+    // (86:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
     function create_then_block_1(ctx) {
     	let div0;
     	let t0;
-    	let t1_value = (/*hits*/ ctx[1].length < limit ? "" : "the first") + "";
+
+    	let t1_value = (/*hits*/ ctx[2].length < /*limit*/ ctx[0]
+    	? ""
+    	: "the first") + "";
+
     	let t1;
     	let t2;
     	let strong;
-    	let t3_value = /*hits*/ ctx[1].length + "";
+    	let t3_value = /*hits*/ ctx[2].length + "";
     	let t3;
     	let t4;
     	let t5;
@@ -41807,8 +41811,11 @@
     			current = true;
     		},
     		p(ctx, dirty) {
-    			if ((!current || dirty & /*hits*/ 2) && t1_value !== (t1_value = (/*hits*/ ctx[1].length < limit ? "" : "the first") + "")) set_data(t1, t1_value);
-    			if ((!current || dirty & /*hits*/ 2) && t3_value !== (t3_value = /*hits*/ ctx[1].length + "")) set_data(t3, t3_value);
+    			if ((!current || dirty & /*hits, limit*/ 5) && t1_value !== (t1_value = (/*hits*/ ctx[2].length < /*limit*/ ctx[0]
+    			? ""
+    			: "the first") + "")) set_data(t1, t1_value);
+
+    			if ((!current || dirty & /*hits*/ 4) && t3_value !== (t3_value = /*hits*/ ctx[2].length + "")) set_data(t3, t3_value);
     		},
     		i(local) {
     			if (current) return;
@@ -41840,7 +41847,7 @@
     	};
     }
 
-    // (95:2) {#if hits}
+    // (97:2) {#if hits}
     function create_if_block(ctx) {
     	let await_block_anchor;
     	let promise;
@@ -41854,11 +41861,11 @@
     		pending: create_pending_block,
     		then: create_then_block,
     		catch: create_catch_block,
-    		value: 1,
+    		value: 2,
     		blocks: [,,,]
     	};
 
-    	handle_promise(promise = /*hits*/ ctx[1], info);
+    	handle_promise(promise = /*hits*/ ctx[2], info);
 
     	return {
     		c() {
@@ -41876,9 +41883,9 @@
     			ctx = new_ctx;
     			info.ctx = ctx;
 
-    			if (dirty & /*hits*/ 2 && promise !== (promise = /*hits*/ ctx[1]) && handle_promise(promise, info)) ; else {
+    			if (dirty & /*hits*/ 4 && promise !== (promise = /*hits*/ ctx[2]) && handle_promise(promise, info)) ; else {
     				const child_ctx = ctx.slice();
-    				child_ctx[1] = info.resolved;
+    				child_ctx[2] = info.resolved;
     				info.block.p(child_ctx, dirty);
     			}
     		},
@@ -41916,11 +41923,11 @@
     	};
     }
 
-    // (96:26)      {#each hits as hit}
+    // (98:26)      {#each hits as hit}
     function create_then_block(ctx) {
     	let each_1_anchor;
     	let current;
-    	let each_value = /*hits*/ ctx[1];
+    	let each_value = /*hits*/ ctx[2];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -41948,8 +41955,8 @@
     			current = true;
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*hits, input*/ 3) {
-    				each_value = /*hits*/ ctx[1];
+    			if (dirty & /*hits, input*/ 6) {
+    				each_value = /*hits*/ ctx[2];
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
@@ -42000,20 +42007,20 @@
     	};
     }
 
-    // (97:4) {#each hits as hit}
+    // (99:4) {#each hits as hit}
     function create_each_block(ctx) {
     	let listitem;
     	let updating_input;
     	let current;
 
     	function listitem_input_binding(value) {
-    		/*listitem_input_binding*/ ctx[3](value);
+    		/*listitem_input_binding*/ ctx[5](value);
     	}
 
-    	let listitem_props = { hit: /*hit*/ ctx[6] };
+    	let listitem_props = { hit: /*hit*/ ctx[8] };
 
-    	if (/*input*/ ctx[0] !== void 0) {
-    		listitem_props.input = /*input*/ ctx[0];
+    	if (/*input*/ ctx[1] !== void 0) {
+    		listitem_props.input = /*input*/ ctx[1];
     	}
 
     	listitem = new ListItem({ props: listitem_props });
@@ -42029,11 +42036,11 @@
     		},
     		p(ctx, dirty) {
     			const listitem_changes = {};
-    			if (dirty & /*hits*/ 2) listitem_changes.hit = /*hit*/ ctx[6];
+    			if (dirty & /*hits*/ 4) listitem_changes.hit = /*hit*/ ctx[8];
 
-    			if (!updating_input && dirty & /*input*/ 1) {
+    			if (!updating_input && dirty & /*input*/ 2) {
     				updating_input = true;
-    				listitem_changes.input = /*input*/ ctx[0];
+    				listitem_changes.input = /*input*/ ctx[1];
     				add_flush_callback(() => updating_input = false);
     			}
 
@@ -42067,103 +42074,94 @@
     }
 
     function create_fragment(ctx) {
+    	let link;
+    	let t0;
     	let main;
-    	let h1;
-    	let t1;
-    	let br;
-    	let t2;
-    	let form;
     	let div1;
     	let input_1;
-    	let t3;
+    	let t1;
     	let div0;
     	let span;
     	let iconloupe;
-    	let t4;
-    	let t5;
+    	let t2;
+    	let t3;
     	let ul;
     	let current;
     	let mounted;
     	let dispose;
     	iconloupe = new IconLoupe({});
-    	let if_block0 = /*hits*/ ctx[1] && create_if_block_1(ctx);
-    	let if_block1 = /*hits*/ ctx[1] && create_if_block(ctx);
+    	let if_block0 = /*hits*/ ctx[2] && create_if_block_1(ctx);
+    	let if_block1 = /*hits*/ ctx[2] && create_if_block(ctx);
 
     	return {
     		c() {
+    			link = element("link");
+    			t0 = space();
     			main = element("main");
-    			h1 = element("h1");
-    			h1.textContent = "Schema.org Explorer";
-    			t1 = space();
-    			br = element("br");
-    			t2 = space();
-    			form = element("form");
     			div1 = element("div");
     			input_1 = element("input");
-    			t3 = space();
+    			t1 = space();
     			div0 = element("div");
     			span = element("span");
     			create_component(iconloupe.$$.fragment);
-    			t4 = space();
+    			t2 = space();
     			if (if_block0) if_block0.c();
-    			t5 = space();
+    			t3 = space();
     			ul = element("ul");
     			if (if_block1) if_block1.c();
-    			attr(h1, "class", "svelte-11fb9cf");
+    			attr(link, "rel", "stylesheet");
+    			attr(link, "href", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
     			attr(input_1, "class", "form-control");
     			attr(input_1, "type", "text");
-    			attr(input_1, "placeholder", "Search");
+    			attr(input_1, "placeholder", "Search Schema.org for 'ATM', or 'Legal Advice'");
     			attr(span, "class", "input-group-text");
     			attr(span, "id", "basic-addon2");
     			attr(div0, "class", "input-group-append");
     			attr(div1, "class", "input-group mb-3");
     			attr(ul, "class", "list-group");
     			attr(ul, "id", "search-results");
-    			attr(main, "class", "svelte-11fb9cf");
+    			attr(main, "class", "svelte-zdvltg");
     		},
     		m(target, anchor) {
+    			append(document.head, link);
+    			insert(target, t0, anchor);
     			insert(target, main, anchor);
-    			append(main, h1);
-    			append(main, t1);
-    			append(main, br);
-    			append(main, t2);
-    			append(main, form);
-    			append(form, div1);
+    			append(main, div1);
     			append(div1, input_1);
-    			set_input_value(input_1, /*input*/ ctx[0]);
-    			append(div1, t3);
+    			set_input_value(input_1, /*input*/ ctx[1]);
+    			append(div1, t1);
     			append(div1, div0);
     			append(div0, span);
     			mount_component(iconloupe, span, null);
-    			append(main, t4);
+    			append(main, t2);
     			if (if_block0) if_block0.m(main, null);
-    			append(main, t5);
+    			append(main, t3);
     			append(main, ul);
     			if (if_block1) if_block1.m(ul, null);
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen(input_1, "input", /*input_1_input_handler*/ ctx[2]);
+    				dispose = listen(input_1, "input", /*input_1_input_handler*/ ctx[4]);
     				mounted = true;
     			}
     		},
     		p(ctx, [dirty]) {
-    			if (dirty & /*input*/ 1 && input_1.value !== /*input*/ ctx[0]) {
-    				set_input_value(input_1, /*input*/ ctx[0]);
+    			if (dirty & /*input*/ 2 && input_1.value !== /*input*/ ctx[1]) {
+    				set_input_value(input_1, /*input*/ ctx[1]);
     			}
 
-    			if (/*hits*/ ctx[1]) {
+    			if (/*hits*/ ctx[2]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
-    					if (dirty & /*hits*/ 2) {
+    					if (dirty & /*hits*/ 4) {
     						transition_in(if_block0, 1);
     					}
     				} else {
     					if_block0 = create_if_block_1(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
-    					if_block0.m(main, t5);
+    					if_block0.m(main, t3);
     				}
     			} else if (if_block0) {
     				group_outros();
@@ -42175,11 +42173,11 @@
     				check_outros();
     			}
 
-    			if (/*hits*/ ctx[1]) {
+    			if (/*hits*/ ctx[2]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty & /*hits*/ 2) {
+    					if (dirty & /*hits*/ 4) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -42212,6 +42210,8 @@
     			current = false;
     		},
     		d(detaching) {
+    			detach(link);
+    			if (detaching) detach(t0);
     			if (detaching) detach(main);
     			destroy_component(iconloupe);
     			if (if_block0) if_block0.d();
@@ -42222,10 +42222,9 @@
     	};
     }
 
-    const url = "https://schema.org/version/latest/schemaorg-current-https.jsonld";
-    const limit = 15;
-
     function instance($$self, $$props, $$invalidate) {
+    	let { limit = 15 } = $$props;
+    	let { url = "https://schema.org/version/latest/schemaorg-current-https.jsonld" } = $$props;
     	const suggest = new LucidSuggest();
     	suggest.setLimit(limit);
     	setUp(DATA);
@@ -42271,29 +42270,34 @@
 
     	function input_1_input_handler() {
     		input = this.value;
-    		$$invalidate(0, input);
+    		$$invalidate(1, input);
     	}
 
     	function listitem_input_binding(value) {
     		input = value;
-    		$$invalidate(0, input);
+    		$$invalidate(1, input);
     	}
 
+    	$$self.$$set = $$props => {
+    		if ("limit" in $$props) $$invalidate(0, limit = $$props.limit);
+    		if ("url" in $$props) $$invalidate(3, url = $$props.url);
+    	};
+
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*input*/ 1) {
+    		if ($$self.$$.dirty & /*input*/ 2) {
     			input && input.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, "").toLowerCase()
-    			? $$invalidate(1, hits = suggest.search(input))
+    			? $$invalidate(2, hits = suggest.search(input))
     			: null;
     		}
     	};
 
-    	return [input, hits, input_1_input_handler, listitem_input_binding];
+    	return [limit, input, hits, url, input_1_input_handler, listitem_input_binding];
     }
 
     class App extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance, create_fragment, safe_not_equal, {});
+    		init(this, options, instance, create_fragment, safe_not_equal, { limit: 0, url: 3 });
     	}
     }
 

@@ -67,7 +67,7 @@
                 {#each comments as comment, i}
                     {@html comment}{#if links[i]}
                         <a
-                            href="/#"
+                            href="#"
                             on:click={() => (input = formatTitle(links[i]))}
                             >{formatTitle(links[i])}</a
                         >
@@ -80,7 +80,7 @@
         {#if links}
             {#each links as link}
                 <a
-                    href="/#"
+                    href="#"
                     class="card-link badge badge-primary text-light"
                     on:click={() => (input = formatTitle(link))}
                     >{formatTitle(link)}</a
@@ -90,7 +90,7 @@
         {#if domainIncludes && domainIncludes.length > 0}
             {#each domainIncludes as incl}
                 <a
-                    href="/#"
+                    href="#"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -101,7 +101,7 @@
         {#if rangeIncludes && rangeIncludes.length > 0}
             {#each rangeIncludes as incl}
                 <a
-                    href="/#"
+                    href="#"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -113,7 +113,7 @@
             <!-- subclass is an object -->
             {#each [...Object.entries(subClassOf)] as [key, value]}
                 <a
-                    href="/#"
+                    href="#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -125,7 +125,7 @@
             <!-- subclass is an array of objects -->
             {#each subClassOf as incl}
                 <a
-                    href="/#"
+                    href="#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a

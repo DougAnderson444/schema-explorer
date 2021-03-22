@@ -69,21 +69,19 @@
 	/>
 </svelte:head>
 <main>
-	<form>
-		<div class="input-group mb-3">
-			<input
-				bind:value={input}
-				class="form-control"
-				type="text"
-				placeholder="Search Schema.org for 'ATM', or 'Legal Advice'"
-			/>
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">
-					<IconLoupe />
-				</span>
-			</div>
+	<div class="input-group mb-3">
+		<input
+			bind:value={input}
+			class="form-control"
+			type="text"
+			placeholder="Search Schema.org for 'ATM', or 'Legal Advice'"
+		/>
+		<div class="input-group-append">
+			<span class="input-group-text" id="basic-addon2">
+				<IconLoupe />
+			</span>
 		</div>
-	</form>
+	</div>
 	{#if hits}
 		{#await hits then hits}
 			<div class="alert alert-success" role="alert">
@@ -112,13 +110,6 @@
 		padding: 1em;
 		max-width: 320px;
 		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 
 	@media (min-width: 481px) {
