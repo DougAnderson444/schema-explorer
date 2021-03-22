@@ -5,10 +5,10 @@
 	import IconLoupe from "./IconLoupe.svelte";
 	import Legend from "./Legend.svelte";
 
-	const url =
-		"https://schema.org/version/latest/schemaorg-current-https.jsonld";
+	export let limit = 15;
 
-	const limit = 15;
+	export let url =
+		"https://schema.org/version/latest/schemaorg-current-https.jsonld";
 
 	const suggest = new LucidSuggest();
 	suggest.setLimit(limit);
@@ -69,15 +69,13 @@
 	/>
 </svelte:head>
 <main>
-	<h1>Schema.org Explorer</h1>
-	<br />
 	<form>
 		<div class="input-group mb-3">
 			<input
 				bind:value={input}
 				class="form-control"
 				type="text"
-				placeholder="Search"
+				placeholder="Search Schema.org for 'ATM', or 'Legal Advice'"
 			/>
 			<div class="input-group-append">
 				<span class="input-group-text" id="basic-addon2">
