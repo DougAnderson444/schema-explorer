@@ -62,6 +62,12 @@
 		: null;
 </script>
 
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	/>
+</svelte:head>
 <main>
 	<h1>Schema.org Explorer</h1>
 	<br />
