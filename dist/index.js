@@ -122,6 +122,9 @@
             throw new Error('Function called outside component initialization');
         return current_component;
     }
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
+    }
 
     const dirty_components = [];
     const binding_callbacks = [];
@@ -786,7 +789,7 @@
     	return child_ctx;
     }
 
-    // (76:12) {:else}
+    // (85:12) {:else}
     function create_else_block(ctx) {
     	let html_tag;
     	let html_anchor;
@@ -808,7 +811,7 @@
     	};
     }
 
-    // (66:12) {#if Array.isArray(comments)}
+    // (75:12) {#if Array.isArray(comments)}
     function create_if_block_5(ctx) {
     	let each_1_anchor;
     	let each_value_5 = /*comments*/ ctx[3];
@@ -864,7 +867,7 @@
     	};
     }
 
-    // (68:35) {#if links[i]}
+    // (77:35) {#if links[i]}
     function create_if_block_6(ctx) {
     	let a;
     	let t_value = formatTitle(/*links*/ ctx[2][/*i*/ ctx[30]]) + "";
@@ -880,7 +883,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     		},
     		m(target, anchor) {
     			insert(target, a, anchor);
@@ -902,7 +905,7 @@
     	};
     }
 
-    // (67:16) {#each comments as comment, i}
+    // (76:16) {#each comments as comment, i}
     function create_each_block_5(ctx) {
     	let html_tag;
     	let raw_value = /*comment*/ ctx[28] + "";
@@ -935,7 +938,7 @@
     	};
     }
 
-    // (80:8) {#if links}
+    // (89:8) {#if links}
     function create_if_block_4(ctx) {
     	let each_1_anchor;
     	let each_value_4 = /*links*/ ctx[2];
@@ -991,7 +994,7 @@
     	};
     }
 
-    // (81:12) {#each links as link}
+    // (90:12) {#each links as link}
     function create_each_block_4(ctx) {
     	let a;
     	let t_value = formatTitle(/*link*/ ctx[25]) + "";
@@ -1007,7 +1010,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     			attr(a, "class", "card-link badge badge-primary text-light");
     		},
     		m(target, anchor) {
@@ -1030,7 +1033,7 @@
     	};
     }
 
-    // (90:8) {#if domainIncludes && domainIncludes.length > 0}
+    // (99:8) {#if domainIncludes && domainIncludes.length > 0}
     function create_if_block_3(ctx) {
     	let each_1_anchor;
     	let each_value_3 = /*domainIncludes*/ ctx[4];
@@ -1086,7 +1089,7 @@
     	};
     }
 
-    // (91:12) {#each domainIncludes as incl}
+    // (100:12) {#each domainIncludes as incl}
     function create_each_block_3(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1102,7 +1105,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     			attr(a, "class", "card-link badge badge-secondary text-light");
     		},
     		m(target, anchor) {
@@ -1125,7 +1128,7 @@
     	};
     }
 
-    // (101:8) {#if rangeIncludes && rangeIncludes.length > 0}
+    // (110:8) {#if rangeIncludes && rangeIncludes.length > 0}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value_2 = /*rangeIncludes*/ ctx[5];
@@ -1181,7 +1184,7 @@
     	};
     }
 
-    // (102:12) {#each rangeIncludes as incl}
+    // (111:12) {#each rangeIncludes as incl}
     function create_each_block_2(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1197,7 +1200,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     			attr(a, "class", "card-link badge badge-success text-light");
     		},
     		m(target, anchor) {
@@ -1220,7 +1223,7 @@
     	};
     }
 
-    // (112:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
+    // (121:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
     function create_if_block_1$1(ctx) {
     	let each_1_anchor;
     	let each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
@@ -1276,7 +1279,7 @@
     	};
     }
 
-    // (114:12) {#each [...Object.entries(subClassOf)] as [key, value]}
+    // (123:12) {#each [...Object.entries(subClassOf)] as [key, value]}
     function create_each_block_1(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*value*/ ctx[18])) + "";
@@ -1292,7 +1295,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -1315,7 +1318,7 @@
     	};
     }
 
-    // (124:8) {#if subClassOf && subClassOf.length > 0}
+    // (133:8) {#if subClassOf && subClassOf.length > 0}
     function create_if_block$1(ctx) {
     	let each_1_anchor;
     	let each_value = /*subClassOf*/ ctx[6];
@@ -1371,7 +1374,7 @@
     	};
     }
 
-    // (126:12) {#each subClassOf as incl}
+    // (135:12) {#each subClassOf as incl}
     function create_each_block$1(ctx) {
     	let a;
     	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
@@ -1387,7 +1390,7 @@
     		c() {
     			a = element("a");
     			t = text(t_value);
-    			attr(a, "href", "#");
+    			attr(a, "href", "#click");
     			attr(a, "class", "card-link badge badge-warning text-dark");
     		},
     		m(target, anchor) {
@@ -1539,6 +1542,13 @@
     }
 
     function instance$1($$self, $$props, $$invalidate) {
+    	onMount(() => {
+    		document.querySelectorAll("a").forEach(a => {
+    			if (!a.hash || !document.querySelectorAll(a.hash).length) return;
+    			a.href = window.location.origin + window.location.pathname + a.hash;
+    		});
+    	});
+
     	let { hit } = $$props;
     	let { input } = $$props;
     	let links = hit.record["rdfs:comment"].match(/[^([[)]+(?=]])/g);

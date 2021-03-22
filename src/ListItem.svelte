@@ -1,4 +1,13 @@
 <script>
+    import { onMount } from "svelte";
+    // because https://github.com/sveltejs/sapper/issues/904
+    onMount(() => {
+        document.querySelectorAll("a").forEach((a) => {
+            if (!a.hash || !document.querySelectorAll(a.hash).length) return;
+            a.href = window.location.origin + window.location.pathname + a.hash;
+        });
+    });
+
     export let hit;
     export let input;
 
@@ -67,7 +76,7 @@
                 {#each comments as comment, i}
                     {@html comment}{#if links[i]}
                         <a
-                            href="#"
+                            href="#click"
                             on:click={() => (input = formatTitle(links[i]))}
                             >{formatTitle(links[i])}</a
                         >
@@ -80,7 +89,7 @@
         {#if links}
             {#each links as link}
                 <a
-                    href="#"
+                    href="#click"
                     class="card-link badge badge-primary text-light"
                     on:click={() => (input = formatTitle(link))}
                     >{formatTitle(link)}</a
@@ -90,7 +99,7 @@
         {#if domainIncludes && domainIncludes.length > 0}
             {#each domainIncludes as incl}
                 <a
-                    href="#"
+                    href="#click"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -101,7 +110,7 @@
         {#if rangeIncludes && rangeIncludes.length > 0}
             {#each rangeIncludes as incl}
                 <a
-                    href="#"
+                    href="#click"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -113,7 +122,7 @@
             <!-- subclass is an object -->
             {#each [...Object.entries(subClassOf)] as [key, value]}
                 <a
-                    href="#"
+                    href="#click"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -125,7 +134,7 @@
             <!-- subclass is an array of objects -->
             {#each subClassOf as incl}
                 <a
-                    href="#"
+                    href="#click"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
