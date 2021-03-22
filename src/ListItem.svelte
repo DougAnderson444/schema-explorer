@@ -75,8 +75,9 @@
             {#if Array.isArray(comments)}
                 {#each comments as comment, i}
                     {@html comment}{#if links[i]}
+                        <!-- svelte-ignore a11y-invalid-attribute -->
                         <a
-                            href="#click"
+                            href="#"
                             on:click={() => (input = formatTitle(links[i]))}
                             >{formatTitle(links[i])}</a
                         >
@@ -88,8 +89,9 @@
         </p>
         {#if links}
             {#each links as link}
+                <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#click"
+                    href="#"
                     class="card-link badge badge-primary text-light"
                     on:click={() => (input = formatTitle(link))}
                     >{formatTitle(link)}</a
@@ -98,8 +100,9 @@
         {/if}
         {#if domainIncludes && domainIncludes.length > 0}
             {#each domainIncludes as incl}
+                <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#click"
+                    href="#"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -109,8 +112,9 @@
 
         {#if rangeIncludes && rangeIncludes.length > 0}
             {#each rangeIncludes as incl}
+                <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#click"
+                    href="#"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -121,8 +125,9 @@
         {#if subClassOf && subClassOf.hasOwnProperty("@id")}
             <!-- subclass is an object -->
             {#each [...Object.entries(subClassOf)] as [key, value]}
+                <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#click"
+                    href="#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -133,8 +138,9 @@
         {#if subClassOf && subClassOf.length > 0}
             <!-- subclass is an array of objects -->
             {#each subClassOf as incl}
+                <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="#click"
+                    href="#"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
