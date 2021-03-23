@@ -747,43 +747,57 @@ function toChunks (title) {
 
 function get_each_context$1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[14] = list[i];
+	child_ctx[16] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[17] = list[i][0];
-	child_ctx[18] = list[i][1];
+	child_ctx[19] = list[i][0];
+	child_ctx[20] = list[i][1];
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[14] = list[i];
+	child_ctx[16] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[14] = list[i];
+	child_ctx[19] = list[i][0];
+	child_ctx[20] = list[i][1];
 	return child_ctx;
 }
 
 function get_each_context_4(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[25] = list[i];
+	child_ctx[16] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_5(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[28] = list[i];
-	child_ctx[30] = i;
+	child_ctx[19] = list[i][0];
+	child_ctx[20] = list[i][1];
 	return child_ctx;
 }
 
-// (86:12) {:else}
+function get_each_context_6(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[31] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_7(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[34] = list[i];
+	child_ctx[36] = i;
+	return child_ctx;
+}
+
+// (85:12) {:else}
 function create_else_block(ctx) {
 	let html_tag;
 	let html_anchor;
@@ -805,10 +819,232 @@ function create_else_block(ctx) {
 	};
 }
 
-// (75:12) {#if Array.isArray(comments)}
+// (74:12) {#if Array.isArray(comments)}
+function create_if_block_7(ctx) {
+	let each_1_anchor;
+	let each_value_7 = /*comments*/ ctx[3];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_7.length; i += 1) {
+		each_blocks[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
+	}
+
+	return {
+		c() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = empty();
+		},
+		m(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			insert(target, each_1_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*input, links, comments*/ 13) {
+				each_value_7 = /*comments*/ ctx[3];
+				let i;
+
+				for (i = 0; i < each_value_7.length; i += 1) {
+					const child_ctx = get_each_context_7(ctx, each_value_7, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_7(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_7.length;
+			}
+		},
+		d(detaching) {
+			destroy_each(each_blocks, detaching);
+			if (detaching) detach(each_1_anchor);
+		}
+	};
+}
+
+// (76:35) {#if links[i]}
+function create_if_block_8(ctx) {
+	let a;
+	let t_value = formatTitle(/*links*/ ctx[2][/*i*/ ctx[36]]) + "";
+	let t;
+	let mounted;
+	let dispose;
+
+	function click_handler() {
+		return /*click_handler*/ ctx[7](/*i*/ ctx[36]);
+	}
+
+	return {
+		c() {
+			a = element("a");
+			t = text(t_value);
+			attr(a, "href", "" + (window.location.pathname + "#"));
+		},
+		m(target, anchor) {
+			insert(target, a, anchor);
+			append(a, t);
+
+			if (!mounted) {
+				dispose = listen(a, "click", click_handler);
+				mounted = true;
+			}
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+		},
+		d(detaching) {
+			if (detaching) detach(a);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (75:16) {#each comments as comment, i}
+function create_each_block_7(ctx) {
+	let html_tag;
+	let raw_value = /*comment*/ ctx[34] + "";
+	let html_anchor;
+	let if_block_anchor;
+	let if_block = /*links*/ ctx[2][/*i*/ ctx[36]] && create_if_block_8(ctx);
+
+	return {
+		c() {
+			html_anchor = empty();
+			if (if_block) if_block.c();
+			if_block_anchor = empty();
+			html_tag = new HtmlTag(html_anchor);
+		},
+		m(target, anchor) {
+			html_tag.m(raw_value, target, anchor);
+			insert(target, html_anchor, anchor);
+			if (if_block) if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (/*links*/ ctx[2][/*i*/ ctx[36]]) if_block.p(ctx, dirty);
+		},
+		d(detaching) {
+			if (detaching) detach(html_anchor);
+			if (detaching) html_tag.d();
+			if (if_block) if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
+		}
+	};
+}
+
+// (89:8) {#if links}
+function create_if_block_6(ctx) {
+	let each_1_anchor;
+	let each_value_6 = /*links*/ ctx[2];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_6.length; i += 1) {
+		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+	}
+
+	return {
+		c() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = empty();
+		},
+		m(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			insert(target, each_1_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*input, links*/ 5) {
+				each_value_6 = /*links*/ ctx[2];
+				let i;
+
+				for (i = 0; i < each_value_6.length; i += 1) {
+					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_6(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_6.length;
+			}
+		},
+		d(detaching) {
+			destroy_each(each_blocks, detaching);
+			if (detaching) detach(each_1_anchor);
+		}
+	};
+}
+
+// (90:12) {#each links as link}
+function create_each_block_6(ctx) {
+	let a;
+	let t_value = formatTitle(/*link*/ ctx[31]) + "";
+	let t;
+	let mounted;
+	let dispose;
+
+	function click_handler_1() {
+		return /*click_handler_1*/ ctx[8](/*link*/ ctx[31]);
+	}
+
+	return {
+		c() {
+			a = element("a");
+			t = text(t_value);
+			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "class", "card-link badge badge-primary text-light");
+		},
+		m(target, anchor) {
+			insert(target, a, anchor);
+			append(a, t);
+
+			if (!mounted) {
+				dispose = listen(a, "click", click_handler_1);
+				mounted = true;
+			}
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+		},
+		d(detaching) {
+			if (detaching) detach(a);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (101:8) {#if domainIncludes && domainIncludes.hasOwnProperty("@id")}
 function create_if_block_5(ctx) {
 	let each_1_anchor;
-	let each_value_5 = /*comments*/ ctx[3];
+	let each_value_5 = [...Object.entries(/*domainIncludes*/ ctx[4])];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_5.length; i += 1) {
@@ -831,8 +1067,8 @@ function create_if_block_5(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, links, comments*/ 13) {
-				each_value_5 = /*comments*/ ctx[3];
+			if (dirty[0] & /*input, domainIncludes*/ 17) {
+				each_value_5 = [...Object.entries(/*domainIncludes*/ ctx[4])];
 				let i;
 
 				for (i = 0; i < each_value_5.length; i += 1) {
@@ -861,30 +1097,31 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (77:35) {#if links[i]}
-function create_if_block_6(ctx) {
+// (103:12) {#each [...Object.entries(domainIncludes)] as [key, value]}
+function create_each_block_5(ctx) {
 	let a;
-	let t_value = formatTitle(/*links*/ ctx[2][/*i*/ ctx[30]]) + "";
+	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler() {
-		return /*click_handler*/ ctx[7](/*i*/ ctx[30]);
+	function click_handler_2() {
+		return /*click_handler_2*/ ctx[9](/*value*/ ctx[20]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
+			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "class", "card-link badge badge-secondary text-light");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler);
+				dispose = listen(a, "click", click_handler_2);
 				mounted = true;
 			}
 		},
@@ -899,43 +1136,10 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (76:16) {#each comments as comment, i}
-function create_each_block_5(ctx) {
-	let html_tag;
-	let raw_value = /*comment*/ ctx[28] + "";
-	let html_anchor;
-	let if_block_anchor;
-	let if_block = /*links*/ ctx[2][/*i*/ ctx[30]] && create_if_block_6(ctx);
-
-	return {
-		c() {
-			html_anchor = empty();
-			if (if_block) if_block.c();
-			if_block_anchor = empty();
-			html_tag = new HtmlTag(html_anchor);
-		},
-		m(target, anchor) {
-			html_tag.m(raw_value, target, anchor);
-			insert(target, html_anchor, anchor);
-			if (if_block) if_block.m(target, anchor);
-			insert(target, if_block_anchor, anchor);
-		},
-		p(ctx, dirty) {
-			if (/*links*/ ctx[2][/*i*/ ctx[30]]) if_block.p(ctx, dirty);
-		},
-		d(detaching) {
-			if (detaching) detach(html_anchor);
-			if (detaching) html_tag.d();
-			if (if_block) if_block.d(detaching);
-			if (detaching) detach(if_block_anchor);
-		}
-	};
-}
-
-// (90:8) {#if links}
+// (114:8) {#if domainIncludes && domainIncludes.length > 0}
 function create_if_block_4(ctx) {
 	let each_1_anchor;
-	let each_value_4 = /*links*/ ctx[2];
+	let each_value_4 = /*domainIncludes*/ ctx[4];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_4.length; i += 1) {
@@ -958,8 +1162,8 @@ function create_if_block_4(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, links*/ 5) {
-				each_value_4 = /*links*/ ctx[2];
+			if (dirty[0] & /*input, domainIncludes*/ 17) {
+				each_value_4 = /*domainIncludes*/ ctx[4];
 				let i;
 
 				for (i = 0; i < each_value_4.length; i += 1) {
@@ -988,31 +1192,31 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (91:12) {#each links as link}
+// (115:12) {#each domainIncludes as incl}
 function create_each_block_4(ctx) {
 	let a;
-	let t_value = formatTitle(/*link*/ ctx[25]) + "";
+	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler_1() {
-		return /*click_handler_1*/ ctx[8](/*link*/ ctx[25]);
+	function click_handler_3() {
+		return /*click_handler_3*/ ctx[10](/*incl*/ ctx[16]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
-			attr(a, "class", "card-link badge badge-primary text-light");
+			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "class", "card-link badge badge-secondary text-light");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler_1);
+				dispose = listen(a, "click", click_handler_3);
 				mounted = true;
 			}
 		},
@@ -1027,10 +1231,10 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (101:8) {#if domainIncludes && domainIncludes.length > 0}
+// (126:8) {#if rangeIncludes && rangeIncludes.hasOwnProperty("@id")}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
-	let each_value_3 = /*domainIncludes*/ ctx[4];
+	let each_value_3 = [...Object.entries(/*rangeIncludes*/ ctx[5])];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -1053,8 +1257,8 @@ function create_if_block_3(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, parseSchema, domainIncludes*/ 17) {
-				each_value_3 = /*domainIncludes*/ ctx[4];
+			if (dirty[0] & /*input, rangeIncludes*/ 33) {
+				each_value_3 = [...Object.entries(/*rangeIncludes*/ ctx[5])];
 				let i;
 
 				for (i = 0; i < each_value_3.length; i += 1) {
@@ -1083,31 +1287,31 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (102:12) {#each domainIncludes as incl}
+// (128:12) {#each [...Object.entries(rangeIncludes)] as [key, value]}
 function create_each_block_3(ctx) {
 	let a;
-	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
+	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler_2() {
-		return /*click_handler_2*/ ctx[9](/*incl*/ ctx[14]);
+	function click_handler_4() {
+		return /*click_handler_4*/ ctx[11](/*value*/ ctx[20]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
-			attr(a, "class", "card-link badge badge-secondary text-light");
+			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "class", "card-link badge badge-success text-light");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler_2);
+				dispose = listen(a, "click", click_handler_4);
 				mounted = true;
 			}
 		},
@@ -1122,7 +1326,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (113:8) {#if rangeIncludes && rangeIncludes.length > 0}
+// (139:8) {#if rangeIncludes && rangeIncludes.length > 0}
 function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let each_value_2 = /*rangeIncludes*/ ctx[5];
@@ -1148,7 +1352,7 @@ function create_if_block_2(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, parseSchema, rangeIncludes*/ 33) {
+			if (dirty[0] & /*input, rangeIncludes*/ 33) {
 				each_value_2 = /*rangeIncludes*/ ctx[5];
 				let i;
 
@@ -1178,23 +1382,23 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (114:12) {#each rangeIncludes as incl}
+// (140:12) {#each rangeIncludes as incl}
 function create_each_block_2(ctx) {
 	let a;
-	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
+	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler_3() {
-		return /*click_handler_3*/ ctx[10](/*incl*/ ctx[14]);
+	function click_handler_5() {
+		return /*click_handler_5*/ ctx[12](/*incl*/ ctx[16]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
+			attr(a, "href", "" + (window.location.pathname + "#"));
 			attr(a, "class", "card-link badge badge-success text-light");
 		},
 		m(target, anchor) {
@@ -1202,7 +1406,7 @@ function create_each_block_2(ctx) {
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler_3);
+				dispose = listen(a, "click", click_handler_5);
 				mounted = true;
 			}
 		},
@@ -1217,7 +1421,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (125:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
+// (151:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
 function create_if_block_1$1(ctx) {
 	let each_1_anchor;
 	let each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
@@ -1243,7 +1447,7 @@ function create_if_block_1$1(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, parseSchema, Object, subClassOf*/ 65) {
+			if (dirty[0] & /*input, subClassOf*/ 65) {
 				each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
 				let i;
 
@@ -1273,23 +1477,23 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (127:12) {#each [...Object.entries(subClassOf)] as [key, value]}
+// (153:12) {#each [...Object.entries(subClassOf)] as [key, value]}
 function create_each_block_1(ctx) {
 	let a;
-	let t_value = formatTitle(parseSchema(/*value*/ ctx[18])) + "";
+	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler_4() {
-		return /*click_handler_4*/ ctx[11](/*value*/ ctx[18]);
+	function click_handler_6() {
+		return /*click_handler_6*/ ctx[13](/*value*/ ctx[20]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
+			attr(a, "href", "" + (window.location.pathname + "#"));
 			attr(a, "class", "card-link badge badge-warning text-dark");
 		},
 		m(target, anchor) {
@@ -1297,7 +1501,7 @@ function create_each_block_1(ctx) {
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler_4);
+				dispose = listen(a, "click", click_handler_6);
 				mounted = true;
 			}
 		},
@@ -1312,7 +1516,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (138:8) {#if subClassOf && subClassOf.length > 0}
+// (164:8) {#if subClassOf && subClassOf.length > 0}
 function create_if_block$1(ctx) {
 	let each_1_anchor;
 	let each_value = /*subClassOf*/ ctx[6];
@@ -1338,7 +1542,7 @@ function create_if_block$1(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*input, formatTitle, parseSchema, subClassOf*/ 65) {
+			if (dirty[0] & /*input, subClassOf*/ 65) {
 				each_value = /*subClassOf*/ ctx[6];
 				let i;
 
@@ -1368,23 +1572,23 @@ function create_if_block$1(ctx) {
 	};
 }
 
-// (140:12) {#each subClassOf as incl}
+// (166:12) {#each subClassOf as incl}
 function create_each_block$1(ctx) {
 	let a;
-	let t_value = formatTitle(parseSchema(/*incl*/ ctx[14])) + "";
+	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
 	let t;
 	let mounted;
 	let dispose;
 
-	function click_handler_5() {
-		return /*click_handler_5*/ ctx[12](/*incl*/ ctx[14]);
+	function click_handler_7() {
+		return /*click_handler_7*/ ctx[14](/*incl*/ ctx[16]);
 	}
 
 	return {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "#");
+			attr(a, "href", "" + (window.location.pathname + "#"));
 			attr(a, "class", "card-link badge badge-warning text-dark");
 		},
 		m(target, anchor) {
@@ -1392,7 +1596,7 @@ function create_each_block$1(ctx) {
 			append(a, t);
 
 			if (!mounted) {
-				dispose = listen(a, "click", click_handler_5);
+				dispose = listen(a, "click", click_handler_7);
 				mounted = true;
 			}
 		},
@@ -1421,23 +1625,29 @@ function create_fragment$3(ctx) {
 	let p;
 	let t4;
 	let t5;
+	let show_if_2 = /*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].hasOwnProperty("@id");
 	let t6;
 	let t7;
-	let show_if = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].hasOwnProperty("@id");
+	let show_if_1 = /*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].hasOwnProperty("@id");
 	let t8;
+	let t9;
+	let show_if = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].hasOwnProperty("@id");
+	let t10;
 
 	function select_block_type(ctx, dirty) {
-		if (Array.isArray(/*comments*/ ctx[3])) return create_if_block_5;
+		if (Array.isArray(/*comments*/ ctx[3])) return create_if_block_7;
 		return create_else_block;
 	}
 
 	let current_block_type = select_block_type(ctx);
 	let if_block0 = current_block_type(ctx);
-	let if_block1 = /*links*/ ctx[2] && create_if_block_4(ctx);
-	let if_block2 = /*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0 && create_if_block_3(ctx);
-	let if_block3 = /*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0 && create_if_block_2(ctx);
-	let if_block4 = show_if && create_if_block_1$1(ctx);
-	let if_block5 = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0 && create_if_block$1(ctx);
+	let if_block1 = /*links*/ ctx[2] && create_if_block_6(ctx);
+	let if_block2 = show_if_2 && create_if_block_5(ctx);
+	let if_block3 = /*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0 && create_if_block_4(ctx);
+	let if_block4 = show_if_1 && create_if_block_3(ctx);
+	let if_block5 = /*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0 && create_if_block_2(ctx);
+	let if_block6 = show_if && create_if_block_1$1(ctx);
+	let if_block7 = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0 && create_if_block$1(ctx);
 
 	return {
 		c() {
@@ -1461,6 +1671,10 @@ function create_fragment$3(ctx) {
 			if (if_block4) if_block4.c();
 			t8 = space();
 			if (if_block5) if_block5.c();
+			t9 = space();
+			if (if_block6) if_block6.c();
+			t10 = space();
+			if (if_block7) if_block7.c();
 			attr(h5, "class", "card-title");
 			attr(h6, "class", "card-subtitle mb-2 text-muted");
 			attr(p, "class", "card-text");
@@ -1491,16 +1705,22 @@ function create_fragment$3(ctx) {
 			if (if_block4) if_block4.m(div0, null);
 			append(div0, t8);
 			if (if_block5) if_block5.m(div0, null);
+			append(div0, t9);
+			if (if_block6) if_block6.m(div0, null);
+			append(div0, t10);
+			if (if_block7) if_block7.m(div0, null);
 		},
-		p(ctx, [dirty]) {
-			if (dirty & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data(t0, t0_value);
-			if (dirty & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data(t2, t2_value);
+		p(ctx, dirty) {
+			if (dirty[0] & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data(t0, t0_value);
+			if (dirty[0] & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data(t2, t2_value);
 			if_block0.p(ctx, dirty);
 			if (/*links*/ ctx[2]) if_block1.p(ctx, dirty);
-			if (/*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0) if_block2.p(ctx, dirty);
-			if (/*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0) if_block3.p(ctx, dirty);
-			if (show_if) if_block4.p(ctx, dirty);
-			if (/*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0) if_block5.p(ctx, dirty);
+			if (show_if_2) if_block2.p(ctx, dirty);
+			if (/*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0) if_block3.p(ctx, dirty);
+			if (show_if_1) if_block4.p(ctx, dirty);
+			if (/*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0) if_block5.p(ctx, dirty);
+			if (show_if) if_block6.p(ctx, dirty);
+			if (/*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0) if_block7.p(ctx, dirty);
 		},
 		i: noop,
 		o: noop,
@@ -1512,6 +1732,8 @@ function create_fragment$3(ctx) {
 			if (if_block3) if_block3.d();
 			if (if_block4) if_block4.d();
 			if (if_block5) if_block5.d();
+			if (if_block6) if_block6.d();
+			if (if_block7) if_block7.d();
 		}
 	};
 }
@@ -1539,8 +1761,7 @@ function instance$1($$self, $$props, $$invalidate) {
 	onMount(() => {
 		document.querySelectorAll("a").forEach(a => {
 			if (!a.hash || !document.querySelectorAll(a.hash).length) return;
-			a.href = window.location.origin + window.location.pathname + a.hash;
-		});
+		}); // a.href = window.location.origin + window.location.pathname + a.hash;
 	});
 
 	let { hit } = $$props;
@@ -1567,10 +1788,12 @@ function instance$1($$self, $$props, $$invalidate) {
 
 	const click_handler = i => $$invalidate(0, input = formatTitle(links[i]));
 	const click_handler_1 = link => $$invalidate(0, input = formatTitle(link));
-	const click_handler_2 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
+	const click_handler_2 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
 	const click_handler_3 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
 	const click_handler_4 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
 	const click_handler_5 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
+	const click_handler_6 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
+	const click_handler_7 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
 
 	$$self.$$set = $$props => {
 		if ("hit" in $$props) $$invalidate(1, hit = $$props.hit);
@@ -1590,14 +1813,16 @@ function instance$1($$self, $$props, $$invalidate) {
 		click_handler_2,
 		click_handler_3,
 		click_handler_4,
-		click_handler_5
+		click_handler_5,
+		click_handler_6,
+		click_handler_7
 	];
 }
 
 class ListItem extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance$1, create_fragment$3, safe_not_equal, { hit: 1, input: 0 });
+		init(this, options, instance$1, create_fragment$3, safe_not_equal, { hit: 1, input: 0 }, [-1, -1]);
 	}
 }
 

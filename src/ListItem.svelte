@@ -97,6 +97,20 @@
                 >
             {/each}
         {/if}
+
+        {#if domainIncludes && domainIncludes.hasOwnProperty("@id")}
+            <!-- subclass is an object -->
+            {#each [...Object.entries(domainIncludes)] as [key, value]}
+                <!-- svelte-ignore a11y-invalid-attribute -->
+                <a
+                    href="{window.location.pathname}#"
+                    class="card-link badge badge-secondary text-light"
+                    on:click={() => (input = formatTitle(parseSchema(value)))}
+                    >{formatTitle(parseSchema(value))}</a
+                >
+            {/each}
+        {/if}
+
         {#if domainIncludes && domainIncludes.length > 0}
             {#each domainIncludes as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
@@ -105,6 +119,19 @@
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
+                >
+            {/each}
+        {/if}
+
+        {#if rangeIncludes && rangeIncludes.hasOwnProperty("@id")}
+            <!-- subclass is an object -->
+            {#each [...Object.entries(rangeIncludes)] as [key, value]}
+                <!-- svelte-ignore a11y-invalid-attribute -->
+                <a
+                    href="{window.location.pathname}#"
+                    class="card-link badge badge-success text-light"
+                    on:click={() => (input = formatTitle(parseSchema(value)))}
+                    >{formatTitle(parseSchema(value))}</a
                 >
             {/each}
         {/if}
