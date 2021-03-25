@@ -753,57 +753,37 @@
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
+    	child_ctx[15] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[19] = list[i][0];
-    	child_ctx[20] = list[i][1];
+    	child_ctx[18] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
+    	child_ctx[21] = list[i][0];
+    	child_ctx[22] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[19] = list[i][0];
-    	child_ctx[20] = list[i][1];
+    	child_ctx[25] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
+    	child_ctx[28] = list[i];
+    	child_ctx[30] = i;
     	return child_ctx;
     }
 
-    function get_each_context_5(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[19] = list[i][0];
-    	child_ctx[20] = list[i][1];
-    	return child_ctx;
-    }
-
-    function get_each_context_6(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[31] = list[i];
-    	return child_ctx;
-    }
-
-    function get_each_context_7(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[34] = list[i];
-    	child_ctx[36] = i;
-    	return child_ctx;
-    }
-
-    // (85:12) {:else}
+    // (109:12) {:else}
     function create_else_block(ctx) {
     	let html_tag;
     	let html_anchor;
@@ -814,7 +794,7 @@
     			html_tag = new HtmlTag(html_anchor);
     		},
     		m(target, anchor) {
-    			html_tag.m(/*comments*/ ctx[3], target, anchor);
+    			html_tag.m(/*comments*/ ctx[4], target, anchor);
     			insert(target, html_anchor, anchor);
     		},
     		p: noop,
@@ -825,14 +805,14 @@
     	};
     }
 
-    // (74:12) {#if Array.isArray(comments)}
-    function create_if_block_7(ctx) {
+    // (98:12) {#if Array.isArray(comments)}
+    function create_if_block_3(ctx) {
     	let each_1_anchor;
-    	let each_value_7 = /*comments*/ ctx[3];
+    	let each_value_4 = /*comments*/ ctx[4];
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value_7.length; i += 1) {
-    		each_blocks[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
+    	for (let i = 0; i < each_value_4.length; i += 1) {
+    		each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
     	}
 
     	return {
@@ -851,17 +831,17 @@
     			insert(target, each_1_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*input, links, comments*/ 13) {
-    				each_value_7 = /*comments*/ ctx[3];
+    			if (dirty & /*window, input, formatTitle, links, comments*/ 25) {
+    				each_value_4 = /*comments*/ ctx[4];
     				let i;
 
-    				for (i = 0; i < each_value_7.length; i += 1) {
-    					const child_ctx = get_each_context_7(ctx, each_value_7, i);
+    				for (i = 0; i < each_value_4.length; i += 1) {
+    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_7(child_ctx);
+    						each_blocks[i] = create_each_block_4(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -871,7 +851,7 @@
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value_7.length;
+    				each_blocks.length = each_value_4.length;
     			}
     		},
     		d(detaching) {
@@ -881,16 +861,16 @@
     	};
     }
 
-    // (76:35) {#if links[i]}
-    function create_if_block_8(ctx) {
+    // (100:35) {#if links[i]}
+    function create_if_block_4(ctx) {
     	let a;
-    	let t_value = formatTitle(/*links*/ ctx[2][/*i*/ ctx[36]]) + "";
+    	let t_value = formatTitle(/*links*/ ctx[3][/*i*/ ctx[30]]) + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[7](/*i*/ ctx[36]);
+    		return /*click_handler*/ ctx[5](/*i*/ ctx[30]);
     	}
 
     	return {
@@ -919,13 +899,13 @@
     	};
     }
 
-    // (75:16) {#each comments as comment, i}
-    function create_each_block_7(ctx) {
+    // (99:16) {#each comments as comment, i}
+    function create_each_block_4(ctx) {
     	let html_tag;
-    	let raw_value = /*comment*/ ctx[34] + "";
+    	let raw_value = /*comment*/ ctx[28] + "";
     	let html_anchor;
     	let if_block_anchor;
-    	let if_block = /*links*/ ctx[2][/*i*/ ctx[36]] && create_if_block_8(ctx);
+    	let if_block = /*links*/ ctx[3][/*i*/ ctx[30]] && create_if_block_4(ctx);
 
     	return {
     		c() {
@@ -941,7 +921,7 @@
     			insert(target, if_block_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (/*links*/ ctx[2][/*i*/ ctx[36]]) if_block.p(ctx, dirty);
+    			if (/*links*/ ctx[3][/*i*/ ctx[30]]) if_block.p(ctx, dirty);
     		},
     		d(detaching) {
     			if (detaching) detach(html_anchor);
@@ -952,14 +932,14 @@
     	};
     }
 
-    // (89:8) {#if links}
-    function create_if_block_6(ctx) {
+    // (113:8) {#if links}
+    function create_if_block_2(ctx) {
     	let each_1_anchor;
-    	let each_value_6 = /*links*/ ctx[2];
+    	let each_value_3 = /*links*/ ctx[3];
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value_6.length; i += 1) {
-    		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+    	for (let i = 0; i < each_value_3.length; i += 1) {
+    		each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
     	}
 
     	return {
@@ -978,17 +958,17 @@
     			insert(target, each_1_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*input, links*/ 5) {
-    				each_value_6 = /*links*/ ctx[2];
+    			if (dirty & /*window, input, formatTitle, links*/ 9) {
+    				each_value_3 = /*links*/ ctx[3];
     				let i;
 
-    				for (i = 0; i < each_value_6.length; i += 1) {
-    					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+    				for (i = 0; i < each_value_3.length; i += 1) {
+    					const child_ctx = get_each_context_3(ctx, each_value_3, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_6(child_ctx);
+    						each_blocks[i] = create_each_block_3(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -998,7 +978,7 @@
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value_6.length;
+    				each_blocks.length = each_value_3.length;
     			}
     		},
     		d(detaching) {
@@ -1008,16 +988,16 @@
     	};
     }
 
-    // (90:12) {#each links as link}
-    function create_each_block_6(ctx) {
+    // (114:12) {#each links as link}
+    function create_each_block_3(ctx) {
     	let a;
-    	let t_value = formatTitle(/*link*/ ctx[31]) + "";
+    	let t_value = formatTitle(/*link*/ ctx[25]) + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[8](/*link*/ ctx[31]);
+    		return /*click_handler_1*/ ctx[6](/*link*/ ctx[25]);
     	}
 
     	return {
@@ -1047,295 +1027,10 @@
     	};
     }
 
-    // (101:8) {#if domainIncludes && domainIncludes.hasOwnProperty("@id")}
-    function create_if_block_5(ctx) {
+    // (126:12) {#if tag.data && tag.data.hasOwnProperty("@id")}
+    function create_if_block_1$1(ctx) {
     	let each_1_anchor;
-    	let each_value_5 = [...Object.entries(/*domainIncludes*/ ctx[4])];
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value_5.length; i += 1) {
-    		each_blocks[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
-    	}
-
-    	return {
-    		c() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
-    		},
-    		m(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert(target, each_1_anchor, anchor);
-    		},
-    		p(ctx, dirty) {
-    			if (dirty[0] & /*input, domainIncludes*/ 17) {
-    				each_value_5 = [...Object.entries(/*domainIncludes*/ ctx[4])];
-    				let i;
-
-    				for (i = 0; i < each_value_5.length; i += 1) {
-    					const child_ctx = get_each_context_5(ctx, each_value_5, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks[i] = create_each_block_5(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value_5.length;
-    			}
-    		},
-    		d(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach(each_1_anchor);
-    		}
-    	};
-    }
-
-    // (103:12) {#each [...Object.entries(domainIncludes)] as [key, value]}
-    function create_each_block_5(ctx) {
-    	let a;
-    	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
-    	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_2() {
-    		return /*click_handler_2*/ ctx[9](/*value*/ ctx[20]);
-    	}
-
-    	return {
-    		c() {
-    			a = element("a");
-    			t = text(t_value);
-    			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-secondary text-light");
-    		},
-    		m(target, anchor) {
-    			insert(target, a, anchor);
-    			append(a, t);
-
-    			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_2);
-    				mounted = true;
-    			}
-    		},
-    		p(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
-    		d(detaching) {
-    			if (detaching) detach(a);
-    			mounted = false;
-    			dispose();
-    		}
-    	};
-    }
-
-    // (114:8) {#if domainIncludes && domainIncludes.length > 0}
-    function create_if_block_4(ctx) {
-    	let each_1_anchor;
-    	let each_value_4 = /*domainIncludes*/ ctx[4];
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value_4.length; i += 1) {
-    		each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
-    	}
-
-    	return {
-    		c() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
-    		},
-    		m(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert(target, each_1_anchor, anchor);
-    		},
-    		p(ctx, dirty) {
-    			if (dirty[0] & /*input, domainIncludes*/ 17) {
-    				each_value_4 = /*domainIncludes*/ ctx[4];
-    				let i;
-
-    				for (i = 0; i < each_value_4.length; i += 1) {
-    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks[i] = create_each_block_4(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value_4.length;
-    			}
-    		},
-    		d(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach(each_1_anchor);
-    		}
-    	};
-    }
-
-    // (115:12) {#each domainIncludes as incl}
-    function create_each_block_4(ctx) {
-    	let a;
-    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
-    	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_3() {
-    		return /*click_handler_3*/ ctx[10](/*incl*/ ctx[16]);
-    	}
-
-    	return {
-    		c() {
-    			a = element("a");
-    			t = text(t_value);
-    			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-secondary text-light");
-    		},
-    		m(target, anchor) {
-    			insert(target, a, anchor);
-    			append(a, t);
-
-    			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_3);
-    				mounted = true;
-    			}
-    		},
-    		p(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
-    		d(detaching) {
-    			if (detaching) detach(a);
-    			mounted = false;
-    			dispose();
-    		}
-    	};
-    }
-
-    // (126:8) {#if rangeIncludes && rangeIncludes.hasOwnProperty("@id")}
-    function create_if_block_3(ctx) {
-    	let each_1_anchor;
-    	let each_value_3 = [...Object.entries(/*rangeIncludes*/ ctx[5])];
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value_3.length; i += 1) {
-    		each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
-    	}
-
-    	return {
-    		c() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
-    		},
-    		m(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert(target, each_1_anchor, anchor);
-    		},
-    		p(ctx, dirty) {
-    			if (dirty[0] & /*input, rangeIncludes*/ 33) {
-    				each_value_3 = [...Object.entries(/*rangeIncludes*/ ctx[5])];
-    				let i;
-
-    				for (i = 0; i < each_value_3.length; i += 1) {
-    					const child_ctx = get_each_context_3(ctx, each_value_3, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks[i] = create_each_block_3(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value_3.length;
-    			}
-    		},
-    		d(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach(each_1_anchor);
-    		}
-    	};
-    }
-
-    // (128:12) {#each [...Object.entries(rangeIncludes)] as [key, value]}
-    function create_each_block_3(ctx) {
-    	let a;
-    	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
-    	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_4() {
-    		return /*click_handler_4*/ ctx[11](/*value*/ ctx[20]);
-    	}
-
-    	return {
-    		c() {
-    			a = element("a");
-    			t = text(t_value);
-    			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-success text-light");
-    		},
-    		m(target, anchor) {
-    			insert(target, a, anchor);
-    			append(a, t);
-
-    			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_4);
-    				mounted = true;
-    			}
-    		},
-    		p(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
-    		d(detaching) {
-    			if (detaching) detach(a);
-    			mounted = false;
-    			dispose();
-    		}
-    	};
-    }
-
-    // (139:8) {#if rangeIncludes && rangeIncludes.length > 0}
-    function create_if_block_2(ctx) {
-    	let each_1_anchor;
-    	let each_value_2 = /*rangeIncludes*/ ctx[5];
+    	let each_value_2 = [...Object.entries(/*tag*/ ctx[15].data)];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -1358,8 +1053,8 @@
     			insert(target, each_1_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*input, rangeIncludes*/ 33) {
-    				each_value_2 = /*rangeIncludes*/ ctx[5];
+    			if (dirty & /*window, tags, input, formatTitle, parseSchema, Object*/ 5) {
+    				each_value_2 = [...Object.entries(/*tag*/ ctx[15].data)];
     				let i;
 
     				for (i = 0; i < each_value_2.length; i += 1) {
@@ -1388,16 +1083,16 @@
     	};
     }
 
-    // (140:12) {#each rangeIncludes as incl}
+    // (128:16) {#each [...Object.entries(tag.data)] as [key, value]}
     function create_each_block_2(ctx) {
     	let a;
-    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
+    	let t_value = formatTitle(parseSchema(/*value*/ ctx[22])) + "";
     	let t;
     	let mounted;
     	let dispose;
 
-    	function click_handler_5() {
-    		return /*click_handler_5*/ ctx[12](/*incl*/ ctx[16]);
+    	function click_handler_2() {
+    		return /*click_handler_2*/ ctx[7](/*value*/ ctx[22]);
     	}
 
     	return {
@@ -1405,14 +1100,14 @@
     			a = element("a");
     			t = text(t_value);
     			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-success text-light");
+    			attr(a, "class", /*tag*/ ctx[15].style);
     		},
     		m(target, anchor) {
     			insert(target, a, anchor);
     			append(a, t);
 
     			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_5);
+    				dispose = listen(a, "click", click_handler_2);
     				mounted = true;
     			}
     		},
@@ -1427,10 +1122,10 @@
     	};
     }
 
-    // (151:8) {#if subClassOf && subClassOf.hasOwnProperty("@id")}
-    function create_if_block_1$1(ctx) {
+    // (140:12) {#if tag.data && tag.data.length > 0}
+    function create_if_block$1(ctx) {
     	let each_1_anchor;
-    	let each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
+    	let each_value_1 = /*tag*/ ctx[15].data;
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -1453,8 +1148,8 @@
     			insert(target, each_1_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*input, subClassOf*/ 65) {
-    				each_value_1 = [...Object.entries(/*subClassOf*/ ctx[6])];
+    			if (dirty & /*window, tags, input, formatTitle, parseSchema*/ 5) {
+    				each_value_1 = /*tag*/ ctx[15].data;
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
@@ -1483,16 +1178,16 @@
     	};
     }
 
-    // (153:12) {#each [...Object.entries(subClassOf)] as [key, value]}
+    // (142:16) {#each tag.data as incl}
     function create_each_block_1(ctx) {
     	let a;
-    	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
+    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[18])) + "";
     	let t;
     	let mounted;
     	let dispose;
 
-    	function click_handler_6() {
-    		return /*click_handler_6*/ ctx[13](/*value*/ ctx[20]);
+    	function click_handler_3() {
+    		return /*click_handler_3*/ ctx[8](/*incl*/ ctx[18]);
     	}
 
     	return {
@@ -1500,14 +1195,14 @@
     			a = element("a");
     			t = text(t_value);
     			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-warning text-dark");
+    			attr(a, "class", /*tag*/ ctx[15].style);
     		},
     		m(target, anchor) {
     			insert(target, a, anchor);
     			append(a, t);
 
     			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_6);
+    				dispose = listen(a, "click", click_handler_3);
     				mounted = true;
     			}
     		},
@@ -1522,97 +1217,36 @@
     	};
     }
 
-    // (164:8) {#if subClassOf && subClassOf.length > 0}
-    function create_if_block$1(ctx) {
-    	let each_1_anchor;
-    	let each_value = /*subClassOf*/ ctx[6];
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
-    	}
+    // (125:8) {#each tags as tag}
+    function create_each_block$1(ctx) {
+    	let show_if = /*tag*/ ctx[15].data && /*tag*/ ctx[15].data.hasOwnProperty("@id");
+    	let t;
+    	let if_block1_anchor;
+    	let if_block0 = show_if && create_if_block_1$1(ctx);
+    	let if_block1 = /*tag*/ ctx[15].data && /*tag*/ ctx[15].data.length > 0 && create_if_block$1(ctx);
 
     	return {
     		c() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
+    			if (if_block0) if_block0.c();
+    			t = space();
+    			if (if_block1) if_block1.c();
+    			if_block1_anchor = empty();
     		},
     		m(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert(target, each_1_anchor, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert(target, t, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert(target, if_block1_anchor, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*input, subClassOf*/ 65) {
-    				each_value = /*subClassOf*/ ctx[6];
-    				let i;
-
-    				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$1(ctx, each_value, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks[i] = create_each_block$1(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value.length;
-    			}
+    			if (show_if) if_block0.p(ctx, dirty);
+    			if (/*tag*/ ctx[15].data && /*tag*/ ctx[15].data.length > 0) if_block1.p(ctx, dirty);
     		},
     		d(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach(each_1_anchor);
-    		}
-    	};
-    }
-
-    // (166:12) {#each subClassOf as incl}
-    function create_each_block$1(ctx) {
-    	let a;
-    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
-    	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_7() {
-    		return /*click_handler_7*/ ctx[14](/*incl*/ ctx[16]);
-    	}
-
-    	return {
-    		c() {
-    			a = element("a");
-    			t = text(t_value);
-    			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr(a, "class", "card-link badge badge-warning text-dark");
-    		},
-    		m(target, anchor) {
-    			insert(target, a, anchor);
-    			append(a, t);
-
-    			if (!mounted) {
-    				dispose = listen(a, "click", click_handler_7);
-    				mounted = true;
-    			}
-    		},
-    		p(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
-    		d(detaching) {
-    			if (detaching) detach(a);
-    			mounted = false;
-    			dispose();
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach(t);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach(if_block1_anchor);
     		}
     	};
     }
@@ -1631,29 +1265,21 @@
     	let p;
     	let t4;
     	let t5;
-    	let show_if_2 = /*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].hasOwnProperty("@id");
-    	let t6;
-    	let t7;
-    	let show_if_1 = /*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].hasOwnProperty("@id");
-    	let t8;
-    	let t9;
-    	let show_if = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].hasOwnProperty("@id");
-    	let t10;
 
     	function select_block_type(ctx, dirty) {
-    		if (Array.isArray(/*comments*/ ctx[3])) return create_if_block_7;
+    		if (Array.isArray(/*comments*/ ctx[4])) return create_if_block_3;
     		return create_else_block;
     	}
 
     	let current_block_type = select_block_type(ctx);
     	let if_block0 = current_block_type(ctx);
-    	let if_block1 = /*links*/ ctx[2] && create_if_block_6(ctx);
-    	let if_block2 = show_if_2 && create_if_block_5(ctx);
-    	let if_block3 = /*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0 && create_if_block_4(ctx);
-    	let if_block4 = show_if_1 && create_if_block_3(ctx);
-    	let if_block5 = /*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0 && create_if_block_2(ctx);
-    	let if_block6 = show_if && create_if_block_1$1(ctx);
-    	let if_block7 = /*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0 && create_if_block$1(ctx);
+    	let if_block1 = /*links*/ ctx[3] && create_if_block_2(ctx);
+    	let each_value = /*tags*/ ctx[2];
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
 
     	return {
     		c() {
@@ -1670,17 +1296,11 @@
     			t4 = space();
     			if (if_block1) if_block1.c();
     			t5 = space();
-    			if (if_block2) if_block2.c();
-    			t6 = space();
-    			if (if_block3) if_block3.c();
-    			t7 = space();
-    			if (if_block4) if_block4.c();
-    			t8 = space();
-    			if (if_block5) if_block5.c();
-    			t9 = space();
-    			if (if_block6) if_block6.c();
-    			t10 = space();
-    			if (if_block7) if_block7.c();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
     			attr(h5, "class", "card-title");
     			attr(h6, "class", "card-subtitle mb-2 text-muted");
     			attr(p, "class", "card-text");
@@ -1704,29 +1324,39 @@
     			append(div0, t4);
     			if (if_block1) if_block1.m(div0, null);
     			append(div0, t5);
-    			if (if_block2) if_block2.m(div0, null);
-    			append(div0, t6);
-    			if (if_block3) if_block3.m(div0, null);
-    			append(div0, t7);
-    			if (if_block4) if_block4.m(div0, null);
-    			append(div0, t8);
-    			if (if_block5) if_block5.m(div0, null);
-    			append(div0, t9);
-    			if (if_block6) if_block6.m(div0, null);
-    			append(div0, t10);
-    			if (if_block7) if_block7.m(div0, null);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div0, null);
+    			}
     		},
-    		p(ctx, dirty) {
-    			if (dirty[0] & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data(t0, t0_value);
-    			if (dirty[0] & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data(t2, t2_value);
+    		p(ctx, [dirty]) {
+    			if (dirty & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data(t0, t0_value);
+    			if (dirty & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data(t2, t2_value);
     			if_block0.p(ctx, dirty);
-    			if (/*links*/ ctx[2]) if_block1.p(ctx, dirty);
-    			if (show_if_2) if_block2.p(ctx, dirty);
-    			if (/*domainIncludes*/ ctx[4] && /*domainIncludes*/ ctx[4].length > 0) if_block3.p(ctx, dirty);
-    			if (show_if_1) if_block4.p(ctx, dirty);
-    			if (/*rangeIncludes*/ ctx[5] && /*rangeIncludes*/ ctx[5].length > 0) if_block5.p(ctx, dirty);
-    			if (show_if) if_block6.p(ctx, dirty);
-    			if (/*subClassOf*/ ctx[6] && /*subClassOf*/ ctx[6].length > 0) if_block7.p(ctx, dirty);
+    			if (/*links*/ ctx[3]) if_block1.p(ctx, dirty);
+
+    			if (dirty & /*tags, window, input, formatTitle, parseSchema, Object*/ 5) {
+    				each_value = /*tags*/ ctx[2];
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div0, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
     		},
     		i: noop,
     		o: noop,
@@ -1734,12 +1364,7 @@
     			if (detaching) detach(div1);
     			if_block0.d();
     			if (if_block1) if_block1.d();
-    			if (if_block2) if_block2.d();
-    			if (if_block3) if_block3.d();
-    			if (if_block4) if_block4.d();
-    			if (if_block5) if_block5.d();
-    			if (if_block6) if_block6.d();
-    			if (if_block7) if_block7.d();
+    			destroy_each(each_blocks, detaching);
     		}
     	};
     }
@@ -1777,6 +1402,31 @@
     	let domainIncludes = hit.record["schema:domainIncludes"];
     	let rangeIncludes = hit.record["schema:rangeIncludes"];
     	let subClassOf = hit.record["rdfs:subClassOf"];
+    	let supersededBy = hit.record["schema:supersededBy"];
+    	let subPropertyOf = hit.record["rdfs:subPropertyOf"];
+
+    	const tags = [
+    		{
+    			data: domainIncludes,
+    			style: "card-link badge badge-secondary text-light"
+    		},
+    		{
+    			data: rangeIncludes,
+    			style: "card-link badge badge-success text-light"
+    		},
+    		{
+    			data: subClassOf,
+    			style: "card-link badge badge-warning text-dark"
+    		},
+    		{
+    			data: supersededBy,
+    			style: "card-link badge badge-danger text-light"
+    		},
+    		{
+    			data: subPropertyOf,
+    			style: "card-link badge badge-info"
+    		}
+    	];
 
     	function format(text) {
     		text = text.replace(/(?:\r\n|\r|\n|\\n)/g, "");
@@ -1796,10 +1446,6 @@
     	const click_handler_1 = link => $$invalidate(0, input = formatTitle(link));
     	const click_handler_2 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
     	const click_handler_3 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
-    	const click_handler_4 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
-    	const click_handler_5 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
-    	const click_handler_6 = value => $$invalidate(0, input = formatTitle(parseSchema(value)));
-    	const click_handler_7 = incl => $$invalidate(0, input = formatTitle(parseSchema(incl)));
 
     	$$self.$$set = $$props => {
     		if ("hit" in $$props) $$invalidate(1, hit = $$props.hit);
@@ -1809,26 +1455,24 @@
     	return [
     		input,
     		hit,
+    		tags,
     		links,
     		comments,
-    		domainIncludes,
-    		rangeIncludes,
-    		subClassOf,
     		click_handler,
     		click_handler_1,
     		click_handler_2,
-    		click_handler_3,
-    		click_handler_4,
-    		click_handler_5,
-    		click_handler_6,
-    		click_handler_7
+    		click_handler_3
     	];
     }
 
     class ListItem extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$1, create_fragment$3, safe_not_equal, { hit: 1, input: 0 }, [-1, -1]);
+    		init(this, options, instance$1, create_fragment$3, safe_not_equal, { hit: 1, input: 0, tags: 2 });
+    	}
+
+    	get tags() {
+    		return this.$$.ctx[2];
     	}
     }
 
@@ -41855,6 +41499,10 @@
     	let a2;
     	let t6;
     	let a3;
+    	let t8;
+    	let a4;
+    	let t10;
+    	let a5;
 
     	return {
     		c() {
@@ -41870,10 +41518,18 @@
     			t6 = space();
     			a3 = element("a");
     			a3.textContent = "Sub-Class Of";
+    			t8 = space();
+    			a4 = element("a");
+    			a4.textContent = "Superseded By";
+    			t10 = space();
+    			a5 = element("a");
+    			a5.textContent = "Sub-Property Of";
     			attr(a0, "class", "badge badge-primary text-light");
     			attr(a1, "class", "badge badge-secondary text-light");
     			attr(a2, "class", "badge badge-success text-light");
     			attr(a3, "class", "badge badge-warning");
+    			attr(a4, "class", "badge badge-danger");
+    			attr(a5, "class", "badge badge-info");
     		},
     		m(target, anchor) {
     			insert(target, t0, anchor);
@@ -41884,6 +41540,10 @@
     			insert(target, a2, anchor);
     			insert(target, t6, anchor);
     			insert(target, a3, anchor);
+    			insert(target, t8, anchor);
+    			insert(target, a4, anchor);
+    			insert(target, t10, anchor);
+    			insert(target, a5, anchor);
     		},
     		p: noop,
     		i: noop,
@@ -41897,6 +41557,10 @@
     			if (detaching) detach(a2);
     			if (detaching) detach(t6);
     			if (detaching) detach(a3);
+    			if (detaching) detach(t8);
+    			if (detaching) detach(a4);
+    			if (detaching) detach(t10);
+    			if (detaching) detach(a5);
     		}
     	};
     }

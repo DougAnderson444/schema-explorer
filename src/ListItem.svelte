@@ -16,7 +16,31 @@
     let domainIncludes = hit.record["schema:domainIncludes"];
     let rangeIncludes = hit.record["schema:rangeIncludes"];
     let subClassOf = hit.record["rdfs:subClassOf"];
+    let supersededBy = hit.record["schema:supersededBy"];
+    let subPropertyOf = hit.record["rdfs:subPropertyOf"];
 
+    export const tags = [
+        {
+            data: domainIncludes,
+            style: "card-link badge badge-secondary text-light",
+        },
+        {
+            data: rangeIncludes,
+            style: "card-link badge badge-success text-light",
+        },
+        {
+            data: subClassOf,
+            style: "card-link badge badge-warning text-dark",
+        },
+        {
+            data: supersededBy,
+            style: "card-link badge badge-danger text-light",
+        },
+        {
+            data: subPropertyOf,
+            style: "card-link badge badge-info",
+        },
+    ];
     function formatTitle(title) {
         return (
             title
@@ -98,80 +122,34 @@
             {/each}
         {/if}
 
-        {#if domainIncludes && domainIncludes.hasOwnProperty("@id")}
-            <!-- subclass is an object -->
-            {#each [...Object.entries(domainIncludes)] as [key, value]}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-secondary text-light"
-                    on:click={() => (input = formatTitle(parseSchema(value)))}
-                    >{formatTitle(parseSchema(value))}</a
-                >
-            {/each}
-        {/if}
+        {#each tags as tag}
+            {#if tag.data && tag.data.hasOwnProperty("@id")}
+                <!-- is an object -->
+                {#each [...Object.entries(tag.data)] as [key, value]}
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a
+                        href="{window.location.pathname}#top-search-bar"
+                        class={tag.style}
+                        on:click={() =>
+                            (input = formatTitle(parseSchema(value)))}
+                        >{formatTitle(parseSchema(value))}</a
+                    >
+                {/each}
+            {/if}
 
-        {#if domainIncludes && domainIncludes.length > 0}
-            {#each domainIncludes as incl}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-secondary text-light"
-                    on:click={() => (input = formatTitle(parseSchema(incl)))}
-                    >{formatTitle(parseSchema(incl))}</a
-                >
-            {/each}
-        {/if}
-
-        {#if rangeIncludes && rangeIncludes.hasOwnProperty("@id")}
-            <!-- subclass is an object -->
-            {#each [...Object.entries(rangeIncludes)] as [key, value]}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-success text-light"
-                    on:click={() => (input = formatTitle(parseSchema(value)))}
-                    >{formatTitle(parseSchema(value))}</a
-                >
-            {/each}
-        {/if}
-
-        {#if rangeIncludes && rangeIncludes.length > 0}
-            {#each rangeIncludes as incl}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-success text-light"
-                    on:click={() => (input = formatTitle(parseSchema(incl)))}
-                    >{formatTitle(parseSchema(incl))}</a
-                >
-            {/each}
-        {/if}
-
-        {#if subClassOf && subClassOf.hasOwnProperty("@id")}
-            <!-- subclass is an object -->
-            {#each [...Object.entries(subClassOf)] as [key, value]}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-warning text-dark"
-                    on:click={() => (input = formatTitle(parseSchema(value)))}
-                    >{formatTitle(parseSchema(value))}</a
-                >
-            {/each}
-        {/if}
-
-        {#if subClassOf && subClassOf.length > 0}
-            <!-- subclass is an array of objects -->
-            {#each subClassOf as incl}
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a
-                    href="{window.location.pathname}#top-search-bar"
-                    class="card-link badge badge-warning text-dark"
-                    on:click={() => (input = formatTitle(parseSchema(incl)))}
-                    >{formatTitle(parseSchema(incl))}</a
-                >
-            {/each}
-        {/if}
+            {#if tag.data && tag.data.length > 0}
+                <!-- is an array -->
+                {#each tag.data as incl}
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a
+                        href="{window.location.pathname}#top-search-bar"
+                        class={tag.style}
+                        on:click={() =>
+                            (input = formatTitle(parseSchema(incl)))}
+                        >{formatTitle(parseSchema(incl))}</a
+                    >
+                {/each}
+            {/if}
+        {/each}
     </div>
 </div>

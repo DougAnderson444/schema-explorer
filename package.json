@@ -1,9 +1,15 @@
 {
   "name": "schema-explorer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "default": "./dist/index.mjs",
+    "svelte": "./src/index.js"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
