@@ -76,7 +76,7 @@
                     {@html comment}{#if links[i]}
                         <!-- svelte-ignore a11y-invalid-attribute -->
                         <a
-                            href="{window.location.pathname}#"
+                            href="{window.location.pathname}#top-search-bar"
                             on:click={() => (input = formatTitle(links[i]))}
                             >{formatTitle(links[i])}</a
                         >
@@ -90,7 +90,7 @@
             {#each links as link}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-primary text-light"
                     on:click={() => (input = formatTitle(link))}
                     >{formatTitle(link)}</a
@@ -103,7 +103,7 @@
             {#each [...Object.entries(domainIncludes)] as [key, value]}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -115,7 +115,7 @@
             {#each domainIncludes as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-secondary text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -128,7 +128,7 @@
             {#each [...Object.entries(rangeIncludes)] as [key, value]}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -140,7 +140,7 @@
             {#each rangeIncludes as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-success text-light"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a
@@ -153,7 +153,7 @@
             {#each [...Object.entries(subClassOf)] as [key, value]}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(value)))}
                     >{formatTitle(parseSchema(value))}</a
@@ -166,7 +166,7 @@
             {#each subClassOf as incl}
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a
-                    href="{window.location.pathname}#"
+                    href="{window.location.pathname}#top-search-bar"
                     class="card-link badge badge-warning text-dark"
                     on:click={() => (input = formatTitle(parseSchema(incl)))}
                     >{formatTitle(parseSchema(incl))}</a

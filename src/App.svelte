@@ -69,6 +69,7 @@
 	/>
 </svelte:head>
 <main>
+	<h2 id="top-search-bar">Explore Schema.org</h2>
 	<div class="input-group mb-3">
 		<input
 			bind:value={input}

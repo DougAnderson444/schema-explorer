@@ -1010,7 +1010,7 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			add_location(a, file$3, 77, 24, 2713);
     		},
     		m: function mount(target, anchor) {
@@ -1170,9 +1170,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-primary text-light");
-    			add_location(a, file$3, 91, 16, 3218);
+    			add_location(a, file$3, 91, 16, 3232);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1288,9 +1288,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-secondary text-light");
-    			add_location(a, file$3, 104, 16, 3782);
+    			add_location(a, file$3, 104, 16, 3810);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1406,9 +1406,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-secondary text-light");
-    			add_location(a, file$3, 116, 16, 4292);
+    			add_location(a, file$3, 116, 16, 4334);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1524,9 +1524,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-success text-light");
-    			add_location(a, file$3, 129, 16, 4881);
+    			add_location(a, file$3, 129, 16, 4937);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1642,9 +1642,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-success text-light");
-    			add_location(a, file$3, 141, 16, 5386);
+    			add_location(a, file$3, 141, 16, 5456);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1760,9 +1760,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-warning text-dark");
-    			add_location(a, file$3, 154, 16, 5964);
+    			add_location(a, file$3, 154, 16, 6048);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -1878,9 +1878,9 @@ var app = (function () {
     		c: function create() {
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#"));
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
     			attr_dev(a, "class", "card-link badge badge-warning text-dark");
-    			add_location(a, file$3, 167, 16, 6513);
+    			add_location(a, file$3, 167, 16, 6611);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -42378,7 +42378,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (85:1) {#if hits}
+    // (86:1) {#if hits}
     function create_if_block_1(ctx) {
     	let await_block_anchor;
     	let promise;
@@ -42445,7 +42445,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(85:1) {#if hits}",
+    		source: "(86:1) {#if hits}",
     		ctx
     	});
 
@@ -42474,7 +42474,7 @@ var app = (function () {
     	return block;
     }
 
-    // (86:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
+    // (87:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
     function create_then_block_1(ctx) {
     	let div0;
     	let t0;
@@ -42507,11 +42507,11 @@ var app = (function () {
     			t5 = space();
     			div1 = element("div");
     			create_component(legend.$$.fragment);
-    			add_location(strong, file, 88, 4, 2303);
+    			add_location(strong, file, 89, 4, 2352);
     			attr_dev(div0, "class", "alert alert-success");
     			attr_dev(div0, "role", "alert");
-    			add_location(div0, file, 86, 3, 2199);
-    			add_location(div1, file, 90, 3, 2356);
+    			add_location(div0, file, 87, 3, 2248);
+    			add_location(div1, file, 91, 3, 2405);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -42554,7 +42554,7 @@ var app = (function () {
     		block,
     		id: create_then_block_1.name,
     		type: "then",
-    		source: "(86:25)     <div class=\\\"alert alert-success\\\" role=\\\"alert\\\">     Showing {hits.length < limit ? \\\"\\\" : \\\"the first\\\"}",
+    		source: "(87:25)     <div class=\\\"alert alert-success\\\" role=\\\"alert\\\">     Showing {hits.length < limit ? \\\"\\\" : \\\"the first\\\"}",
     		ctx
     	});
 
@@ -42583,7 +42583,7 @@ var app = (function () {
     	return block;
     }
 
-    // (97:2) {#if hits}
+    // (98:2) {#if hits}
     function create_if_block(ctx) {
     	let await_block_anchor;
     	let promise;
@@ -42650,7 +42650,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(97:2) {#if hits}",
+    		source: "(98:2) {#if hits}",
     		ctx
     	});
 
@@ -42679,7 +42679,7 @@ var app = (function () {
     	return block;
     }
 
-    // (98:26)      {#each hits as hit}
+    // (99:26)      {#each hits as hit}
     function create_then_block(ctx) {
     	let each_1_anchor;
     	let current;
@@ -42768,14 +42768,14 @@ var app = (function () {
     		block,
     		id: create_then_block.name,
     		type: "then",
-    		source: "(98:26)      {#each hits as hit}",
+    		source: "(99:26)      {#each hits as hit}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (99:4) {#each hits as hit}
+    // (100:4) {#each hits as hit}
     function create_each_block(ctx) {
     	let listitem;
     	let updating_input;
@@ -42832,7 +42832,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(99:4) {#each hits as hit}",
+    		source: "(100:4) {#each hits as hit}",
     		ctx
     	});
 
@@ -42865,14 +42865,16 @@ var app = (function () {
     	let link;
     	let t0;
     	let main;
+    	let h2;
+    	let t2;
     	let div1;
     	let input_1;
-    	let t1;
+    	let t3;
     	let div0;
     	let span;
     	let iconloupe;
-    	let t2;
-    	let t3;
+    	let t4;
+    	let t5;
     	let ul;
     	let current;
     	let mounted;
@@ -42886,34 +42888,39 @@ var app = (function () {
     			link = element("link");
     			t0 = space();
     			main = element("main");
+    			h2 = element("h2");
+    			h2.textContent = "Explore Schema.org";
+    			t2 = space();
     			div1 = element("div");
     			input_1 = element("input");
-    			t1 = space();
+    			t3 = space();
     			div0 = element("div");
     			span = element("span");
     			create_component(iconloupe.$$.fragment);
-    			t2 = space();
+    			t4 = space();
     			if (if_block0) if_block0.c();
-    			t3 = space();
+    			t5 = space();
     			ul = element("ul");
     			if (if_block1) if_block1.c();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
     			add_location(link, file, 65, 1, 1720);
+    			attr_dev(h2, "id", "top-search-bar");
+    			add_location(h2, file, 71, 1, 1854);
     			attr_dev(input_1, "class", "form-control");
     			attr_dev(input_1, "type", "text");
     			attr_dev(input_1, "placeholder", "Search Schema.org for 'ATM', or 'Legal Advice'");
-    			add_location(input_1, file, 72, 2, 1887);
+    			add_location(input_1, file, 73, 2, 1936);
     			attr_dev(span, "class", "input-group-text");
     			attr_dev(span, "id", "basic-addon2");
-    			add_location(span, file, 79, 3, 2062);
+    			add_location(span, file, 80, 3, 2111);
     			attr_dev(div0, "class", "input-group-append");
-    			add_location(div0, file, 78, 2, 2026);
+    			add_location(div0, file, 79, 2, 2075);
     			attr_dev(div1, "class", "input-group mb-3");
-    			add_location(div1, file, 71, 1, 1854);
+    			add_location(div1, file, 72, 1, 1903);
     			attr_dev(ul, "class", "list-group");
     			attr_dev(ul, "id", "search-results");
-    			add_location(ul, file, 95, 1, 2406);
+    			add_location(ul, file, 96, 1, 2455);
     			attr_dev(main, "class", "svelte-zdvltg");
     			add_location(main, file, 70, 0, 1846);
     		},
@@ -42924,16 +42931,18 @@ var app = (function () {
     			append_dev(document.head, link);
     			insert_dev(target, t0, anchor);
     			insert_dev(target, main, anchor);
+    			append_dev(main, h2);
+    			append_dev(main, t2);
     			append_dev(main, div1);
     			append_dev(div1, input_1);
     			set_input_value(input_1, /*input*/ ctx[1]);
-    			append_dev(div1, t1);
+    			append_dev(div1, t3);
     			append_dev(div1, div0);
     			append_dev(div0, span);
     			mount_component(iconloupe, span, null);
-    			append_dev(main, t2);
+    			append_dev(main, t4);
     			if (if_block0) if_block0.m(main, null);
-    			append_dev(main, t3);
+    			append_dev(main, t5);
     			append_dev(main, ul);
     			if (if_block1) if_block1.m(ul, null);
     			current = true;
@@ -42959,7 +42968,7 @@ var app = (function () {
     					if_block0 = create_if_block_1(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
-    					if_block0.m(main, t3);
+    					if_block0.m(main, t5);
     				}
     			} else if (if_block0) {
     				group_outros();

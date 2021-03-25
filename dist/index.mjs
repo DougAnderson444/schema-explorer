@@ -891,7 +891,7 @@ function create_if_block_8(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
@@ -1018,7 +1018,7 @@ function create_each_block_6(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-primary text-light");
 		},
 		m(target, anchor) {
@@ -1113,7 +1113,7 @@ function create_each_block_5(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-secondary text-light");
 		},
 		m(target, anchor) {
@@ -1208,7 +1208,7 @@ function create_each_block_4(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-secondary text-light");
 		},
 		m(target, anchor) {
@@ -1303,7 +1303,7 @@ function create_each_block_3(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-success text-light");
 		},
 		m(target, anchor) {
@@ -1398,7 +1398,7 @@ function create_each_block_2(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-success text-light");
 		},
 		m(target, anchor) {
@@ -1493,7 +1493,7 @@ function create_each_block_1(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-warning text-dark");
 		},
 		m(target, anchor) {
@@ -1588,7 +1588,7 @@ function create_each_block$1(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", "" + (window.location.pathname + "#"));
+			attr(a, "href", "" + (window.location.pathname + "#top-search-bar"));
 			attr(a, "class", "card-link badge badge-warning text-dark");
 		},
 		m(target, anchor) {
@@ -41910,7 +41910,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (85:1) {#if hits}
+// (86:1) {#if hits}
 function create_if_block_1(ctx) {
 	let await_block_anchor;
 	let promise;
@@ -41986,7 +41986,7 @@ function create_catch_block_1(ctx) {
 	};
 }
 
-// (86:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
+// (87:25)     <div class="alert alert-success" role="alert">     Showing {hits.length < limit ? "" : "the first"}
 function create_then_block_1(ctx) {
 	let div0;
 	let t0;
@@ -42072,7 +42072,7 @@ function create_pending_block_1(ctx) {
 	};
 }
 
-// (97:2) {#if hits}
+// (98:2) {#if hits}
 function create_if_block(ctx) {
 	let await_block_anchor;
 	let promise;
@@ -42148,7 +42148,7 @@ function create_catch_block(ctx) {
 	};
 }
 
-// (98:26)      {#each hits as hit}
+// (99:26)      {#each hits as hit}
 function create_then_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -42232,7 +42232,7 @@ function create_then_block(ctx) {
 	};
 }
 
-// (99:4) {#each hits as hit}
+// (100:4) {#each hits as hit}
 function create_each_block(ctx) {
 	let listitem;
 	let updating_input;
@@ -42302,14 +42302,16 @@ function create_fragment(ctx) {
 	let link;
 	let t0;
 	let main;
+	let h2;
+	let t2;
 	let div1;
 	let input_1;
-	let t1;
+	let t3;
 	let div0;
 	let span;
 	let iconloupe;
-	let t2;
-	let t3;
+	let t4;
+	let t5;
 	let ul;
 	let current;
 	let mounted;
@@ -42323,19 +42325,23 @@ function create_fragment(ctx) {
 			link = element("link");
 			t0 = space();
 			main = element("main");
+			h2 = element("h2");
+			h2.textContent = "Explore Schema.org";
+			t2 = space();
 			div1 = element("div");
 			input_1 = element("input");
-			t1 = space();
+			t3 = space();
 			div0 = element("div");
 			span = element("span");
 			create_component(iconloupe.$$.fragment);
-			t2 = space();
+			t4 = space();
 			if (if_block0) if_block0.c();
-			t3 = space();
+			t5 = space();
 			ul = element("ul");
 			if (if_block1) if_block1.c();
 			attr(link, "rel", "stylesheet");
 			attr(link, "href", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
+			attr(h2, "id", "top-search-bar");
 			attr(input_1, "class", "form-control");
 			attr(input_1, "type", "text");
 			attr(input_1, "placeholder", "Search Schema.org for 'ATM', or 'Legal Advice'");
@@ -42351,16 +42357,18 @@ function create_fragment(ctx) {
 			append(document.head, link);
 			insert(target, t0, anchor);
 			insert(target, main, anchor);
+			append(main, h2);
+			append(main, t2);
 			append(main, div1);
 			append(div1, input_1);
 			set_input_value(input_1, /*input*/ ctx[1]);
-			append(div1, t1);
+			append(div1, t3);
 			append(div1, div0);
 			append(div0, span);
 			mount_component(iconloupe, span, null);
-			append(main, t2);
+			append(main, t4);
 			if (if_block0) if_block0.m(main, null);
-			append(main, t3);
+			append(main, t5);
 			append(main, ul);
 			if (if_block1) if_block1.m(ul, null);
 			current = true;
@@ -42386,7 +42394,7 @@ function create_fragment(ctx) {
 					if_block0 = create_if_block_1(ctx);
 					if_block0.c();
 					transition_in(if_block0, 1);
-					if_block0.m(main, t3);
+					if_block0.m(main, t5);
 				}
 			} else if (if_block0) {
 				group_outros();
