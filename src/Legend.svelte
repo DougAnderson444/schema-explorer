@@ -10,5 +10,6 @@ Legend: <a class="badge badge-primary text-light">Links</a>
 <a class="badge badge-danger">Superseded By</a>
 <!-- svelte-ignore a11y-missing-attribute -->
 <a class="badge badge-info">Sub-Property Of</a>
-<!-- <a href="/#" class="badge badge-light" />
-<a href="/#" class="badge badge-dark" /> -->
+<!-- svelte-ignore a11y-missing-attribute -->
+<a class="badge badge-light">Source</a>
+<!-- <a href="/#" class="badge badge-dark" /> -->

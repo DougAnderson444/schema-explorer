@@ -18,6 +18,7 @@
     let subClassOf = hit.record["rdfs:subClassOf"];
     let supersededBy = hit.record["schema:supersededBy"];
     let subPropertyOf = hit.record["rdfs:subPropertyOf"];
+    let source = hit.record["schema:source"];
 
     export const tags = [
         {
@@ -151,5 +152,31 @@
                 {/each}
             {/if}
         {/each}
+
+        {#if source}
+            {#if source && source.hasOwnProperty("@id")}
+                <!-- is an object -->
+                {#each [...Object.entries(source)] as [key, value]}
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <br /><a
+                        href={value}
+                        class="card-link badge badge-light"
+                        target="_blank">{value}</a
+                    >
+                {/each}
+            {/if}
+
+            {#if source && source.length > 0}
+                <!-- is an array -->
+                {#each source as incl}
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <br /><a
+                        href={incl["@id"]}
+                        target="_blank"
+                        class="card-link badge badge-light">{incl["@id"]}</a
+                    >
+                {/each}
+            {/if}
+        {/if}
     </div>
 </div>

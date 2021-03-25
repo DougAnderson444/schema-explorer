@@ -844,37 +844,50 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[15] = list[i];
+    	child_ctx[16] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
+    	child_ctx[19] = list[i][0];
+    	child_ctx[20] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i][0];
-    	child_ctx[22] = list[i][1];
+    	child_ctx[23] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[25] = list[i];
+    	child_ctx[16] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[28] = list[i];
-    	child_ctx[30] = i;
+    	child_ctx[19] = list[i][0];
+    	child_ctx[20] = list[i][1];
     	return child_ctx;
     }
 
-    // (109:12) {:else}
+    function get_each_context_5(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[30] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_6(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[33] = list[i];
+    	child_ctx[35] = i;
+    	return child_ctx;
+    }
+
+    // (110:12) {:else}
     function create_else_block(ctx) {
     	let html_tag;
     	let html_anchor;
@@ -899,17 +912,295 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(109:12) {:else}",
+    		source: "(110:12) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (98:12) {#if Array.isArray(comments)}
-    function create_if_block_3(ctx) {
+    // (99:12) {#if Array.isArray(comments)}
+    function create_if_block_6(ctx) {
     	let each_1_anchor;
-    	let each_value_4 = /*comments*/ ctx[4];
+    	let each_value_6 = /*comments*/ ctx[4];
+    	validate_each_argument(each_value_6);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_6.length; i += 1) {
+    		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*input, links, comments*/ 25) {
+    				each_value_6 = /*comments*/ ctx[4];
+    				validate_each_argument(each_value_6);
+    				let i;
+
+    				for (i = 0; i < each_value_6.length; i += 1) {
+    					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_6(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_6.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(99:12) {#if Array.isArray(comments)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (101:35) {#if links[i]}
+    function create_if_block_7(ctx) {
+    	let a;
+    	let t_value = formatTitle(/*links*/ ctx[3][/*i*/ ctx[35]]) + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[6](/*i*/ ctx[35]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			a = element("a");
+    			t = text(t_value);
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
+    			add_location(a, file$3, 102, 24, 3501);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, a, anchor);
+    			append_dev(a, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(a, "click", click_handler, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(a);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_7.name,
+    		type: "if",
+    		source: "(101:35) {#if links[i]}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (100:16) {#each comments as comment, i}
+    function create_each_block_6(ctx) {
+    	let html_tag;
+    	let raw_value = /*comment*/ ctx[33] + "";
+    	let html_anchor;
+    	let if_block_anchor;
+    	let if_block = /*links*/ ctx[3][/*i*/ ctx[35]] && create_if_block_7(ctx);
+
+    	const block = {
+    		c: function create() {
+    			html_anchor = empty();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    			html_tag = new HtmlTag(html_anchor);
+    		},
+    		m: function mount(target, anchor) {
+    			html_tag.m(raw_value, target, anchor);
+    			insert_dev(target, html_anchor, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*links*/ ctx[3][/*i*/ ctx[35]]) if_block.p(ctx, dirty);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(html_anchor);
+    			if (detaching) html_tag.d();
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_6.name,
+    		type: "each",
+    		source: "(100:16) {#each comments as comment, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (114:8) {#if links}
+    function create_if_block_5(ctx) {
+    	let each_1_anchor;
+    	let each_value_5 = /*links*/ ctx[3];
+    	validate_each_argument(each_value_5);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_5.length; i += 1) {
+    		each_blocks[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*input, links*/ 9) {
+    				each_value_5 = /*links*/ ctx[3];
+    				validate_each_argument(each_value_5);
+    				let i;
+
+    				for (i = 0; i < each_value_5.length; i += 1) {
+    					const child_ctx = get_each_context_5(ctx, each_value_5, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_5(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_5.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(114:8) {#if links}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (115:12) {#each links as link}
+    function create_each_block_5(ctx) {
+    	let a;
+    	let t_value = formatTitle(/*link*/ ctx[30]) + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler_1() {
+    		return /*click_handler_1*/ ctx[7](/*link*/ ctx[30]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			a = element("a");
+    			t = text(t_value);
+    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
+    			attr_dev(a, "class", "card-link badge badge-primary text-light");
+    			add_location(a, file$3, 116, 16, 4020);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, a, anchor);
+    			append_dev(a, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(a, "click", click_handler_1, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(a);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_5.name,
+    		type: "each",
+    		source: "(115:12) {#each links as link}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (127:12) {#if tag.data && tag.data.hasOwnProperty("@id")}
+    function create_if_block_4(ctx) {
+    	let each_1_anchor;
+    	let each_value_4 = [...Object.entries(/*tag*/ ctx[23].data)];
     	validate_each_argument(each_value_4);
     	let each_blocks = [];
 
@@ -933,8 +1224,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*window, input, formatTitle, links, comments*/ 25) {
-    				each_value_4 = /*comments*/ ctx[4];
+    			if (dirty[0] & /*tags, input*/ 5) {
+    				each_value_4 = [...Object.entries(/*tag*/ ctx[23].data)];
     				validate_each_argument(each_value_4);
     				let i;
 
@@ -965,25 +1256,25 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3.name,
+    		id: create_if_block_4.name,
     		type: "if",
-    		source: "(98:12) {#if Array.isArray(comments)}",
+    		source: "(127:12) {#if tag.data && tag.data.hasOwnProperty(\\\"@id\\\")}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (100:35) {#if links[i]}
-    function create_if_block_4(ctx) {
+    // (129:16) {#each [...Object.entries(tag.data)] as [key, value]}
+    function create_each_block_4(ctx) {
     	let a;
-    	let t_value = formatTitle(/*links*/ ctx[3][/*i*/ ctx[30]]) + "";
+    	let t_value = formatTitle(parseSchema(/*value*/ ctx[20])) + "";
     	let t;
     	let mounted;
     	let dispose;
 
-    	function click_handler() {
-    		return /*click_handler*/ ctx[5](/*i*/ ctx[30]);
+    	function click_handler_2() {
+    		return /*click_handler_2*/ ctx[8](/*value*/ ctx[20]);
     	}
 
     	const block = {
@@ -991,14 +1282,15 @@ var app = (function () {
     			a = element("a");
     			t = text(t_value);
     			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			add_location(a, file$3, 101, 24, 3454);
+    			attr_dev(a, "class", /*tag*/ ctx[23].style);
+    			add_location(a, file$3, 130, 20, 4620);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
     			append_dev(a, t);
 
     			if (!mounted) {
-    				dispose = listen_dev(a, "click", click_handler, false, false, false);
+    				dispose = listen_dev(a, "click", click_handler_2, false, false, false);
     				mounted = true;
     			}
     		},
@@ -1014,62 +1306,19 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4.name,
-    		type: "if",
-    		source: "(100:35) {#if links[i]}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (99:16) {#each comments as comment, i}
-    function create_each_block_4(ctx) {
-    	let html_tag;
-    	let raw_value = /*comment*/ ctx[28] + "";
-    	let html_anchor;
-    	let if_block_anchor;
-    	let if_block = /*links*/ ctx[3][/*i*/ ctx[30]] && create_if_block_4(ctx);
-
-    	const block = {
-    		c: function create() {
-    			html_anchor = empty();
-    			if (if_block) if_block.c();
-    			if_block_anchor = empty();
-    			html_tag = new HtmlTag(html_anchor);
-    		},
-    		m: function mount(target, anchor) {
-    			html_tag.m(raw_value, target, anchor);
-    			insert_dev(target, html_anchor, anchor);
-    			if (if_block) if_block.m(target, anchor);
-    			insert_dev(target, if_block_anchor, anchor);
-    		},
-    		p: function update(ctx, dirty) {
-    			if (/*links*/ ctx[3][/*i*/ ctx[30]]) if_block.p(ctx, dirty);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(html_anchor);
-    			if (detaching) html_tag.d();
-    			if (if_block) if_block.d(detaching);
-    			if (detaching) detach_dev(if_block_anchor);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(99:16) {#each comments as comment, i}",
+    		source: "(129:16) {#each [...Object.entries(tag.data)] as [key, value]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (113:8) {#if links}
-    function create_if_block_2(ctx) {
+    // (141:12) {#if tag.data && tag.data.length > 0}
+    function create_if_block_3(ctx) {
     	let each_1_anchor;
-    	let each_value_3 = /*links*/ ctx[3];
+    	let each_value_3 = /*tag*/ ctx[23].data;
     	validate_each_argument(each_value_3);
     	let each_blocks = [];
 
@@ -1093,8 +1342,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*window, input, formatTitle, links*/ 9) {
-    				each_value_3 = /*links*/ ctx[3];
+    			if (dirty[0] & /*tags, input*/ 5) {
+    				each_value_3 = /*tag*/ ctx[23].data;
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -1125,25 +1374,25 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2.name,
+    		id: create_if_block_3.name,
     		type: "if",
-    		source: "(113:8) {#if links}",
+    		source: "(141:12) {#if tag.data && tag.data.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (114:12) {#each links as link}
+    // (143:16) {#each tag.data as incl}
     function create_each_block_3(ctx) {
     	let a;
-    	let t_value = formatTitle(/*link*/ ctx[25]) + "";
+    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[16])) + "";
     	let t;
     	let mounted;
     	let dispose;
 
-    	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[6](/*link*/ ctx[25]);
+    	function click_handler_3() {
+    		return /*click_handler_3*/ ctx[9](/*incl*/ ctx[16]);
     	}
 
     	const block = {
@@ -1151,15 +1400,15 @@ var app = (function () {
     			a = element("a");
     			t = text(t_value);
     			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr_dev(a, "class", "card-link badge badge-primary text-light");
-    			add_location(a, file$3, 115, 16, 3973);
+    			attr_dev(a, "class", /*tag*/ ctx[23].style);
+    			add_location(a, file$3, 144, 20, 5204);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
     			append_dev(a, t);
 
     			if (!mounted) {
-    				dispose = listen_dev(a, "click", click_handler_1, false, false, false);
+    				dispose = listen_dev(a, "click", click_handler_3, false, false, false);
     				mounted = true;
     			}
     		},
@@ -1177,117 +1426,43 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(114:12) {#each links as link}",
+    		source: "(143:16) {#each tag.data as incl}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (126:12) {#if tag.data && tag.data.hasOwnProperty("@id")}
-    function create_if_block_1$1(ctx) {
-    	let each_1_anchor;
-    	let each_value_2 = [...Object.entries(/*tag*/ ctx[15].data)];
-    	validate_each_argument(each_value_2);
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value_2.length; i += 1) {
-    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
-    	}
+    // (126:8) {#each tags as tag}
+    function create_each_block_2(ctx) {
+    	let show_if = /*tag*/ ctx[23].data && /*tag*/ ctx[23].data.hasOwnProperty("@id");
+    	let t;
+    	let if_block1_anchor;
+    	let if_block0 = show_if && create_if_block_4(ctx);
+    	let if_block1 = /*tag*/ ctx[23].data && /*tag*/ ctx[23].data.length > 0 && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
+    			if (if_block0) if_block0.c();
+    			t = space();
+    			if (if_block1) if_block1.c();
+    			if_block1_anchor = empty();
     		},
     		m: function mount(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert_dev(target, each_1_anchor, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, if_block1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*window, tags, input, formatTitle, parseSchema, Object*/ 5) {
-    				each_value_2 = [...Object.entries(/*tag*/ ctx[15].data)];
-    				validate_each_argument(each_value_2);
-    				let i;
-
-    				for (i = 0; i < each_value_2.length; i += 1) {
-    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks[i] = create_each_block_2(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value_2.length;
-    			}
+    			if (show_if) if_block0.p(ctx, dirty);
+    			if (/*tag*/ ctx[23].data && /*tag*/ ctx[23].data.length > 0) if_block1.p(ctx, dirty);
     		},
     		d: function destroy(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(each_1_anchor);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_1$1.name,
-    		type: "if",
-    		source: "(126:12) {#if tag.data && tag.data.hasOwnProperty(\\\"@id\\\")}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (128:16) {#each [...Object.entries(tag.data)] as [key, value]}
-    function create_each_block_2(ctx) {
-    	let a;
-    	let t_value = formatTitle(parseSchema(/*value*/ ctx[22])) + "";
-    	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_2() {
-    		return /*click_handler_2*/ ctx[7](/*value*/ ctx[22]);
-    	}
-
-    	const block = {
-    		c: function create() {
-    			a = element("a");
-    			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr_dev(a, "class", /*tag*/ ctx[15].style);
-    			add_location(a, file$3, 129, 20, 4573);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, a, anchor);
-    			append_dev(a, t);
-
-    			if (!mounted) {
-    				dispose = listen_dev(a, "click", click_handler_2, false, false, false);
-    				mounted = true;
-    			}
-    		},
-    		p: function update(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(a);
-    			mounted = false;
-    			dispose();
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(if_block1_anchor);
     		}
     	};
 
@@ -1295,17 +1470,61 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(128:16) {#each [...Object.entries(tag.data)] as [key, value]}",
+    		source: "(126:8) {#each tags as tag}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (140:12) {#if tag.data && tag.data.length > 0}
+    // (156:8) {#if source}
     function create_if_block$1(ctx) {
+    	let show_if = /*source*/ ctx[5] && /*source*/ ctx[5].hasOwnProperty("@id");
+    	let t;
+    	let if_block1_anchor;
+    	let if_block0 = show_if && create_if_block_2(ctx);
+    	let if_block1 = /*source*/ ctx[5] && /*source*/ ctx[5].length > 0 && create_if_block_1$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block0) if_block0.c();
+    			t = space();
+    			if (if_block1) if_block1.c();
+    			if_block1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, if_block1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (show_if) if_block0.p(ctx, dirty);
+    			if (/*source*/ ctx[5] && /*source*/ ctx[5].length > 0) if_block1.p(ctx, dirty);
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(if_block1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(156:8) {#if source}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (157:12) {#if source && source.hasOwnProperty("@id")}
+    function create_if_block_2(ctx) {
     	let each_1_anchor;
-    	let each_value_1 = /*tag*/ ctx[15].data;
+    	let each_value_1 = [...Object.entries(/*source*/ ctx[5])];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -1329,8 +1548,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*window, tags, input, formatTitle, parseSchema*/ 5) {
-    				each_value_1 = /*tag*/ ctx[15].data;
+    			if (dirty[0] & /*source*/ 32) {
+    				each_value_1 = [...Object.entries(/*source*/ ctx[5])];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -1361,51 +1580,42 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block_2.name,
     		type: "if",
-    		source: "(140:12) {#if tag.data && tag.data.length > 0}",
+    		source: "(157:12) {#if source && source.hasOwnProperty(\\\"@id\\\")}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (142:16) {#each tag.data as incl}
+    // (159:16) {#each [...Object.entries(source)] as [key, value]}
     function create_each_block_1(ctx) {
+    	let br;
     	let a;
-    	let t_value = formatTitle(parseSchema(/*incl*/ ctx[18])) + "";
+    	let t_value = /*value*/ ctx[20] + "";
     	let t;
-    	let mounted;
-    	let dispose;
-
-    	function click_handler_3() {
-    		return /*click_handler_3*/ ctx[8](/*incl*/ ctx[18]);
-    	}
 
     	const block = {
     		c: function create() {
+    			br = element("br");
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", "" + (window.location.pathname + "#top-search-bar"));
-    			attr_dev(a, "class", /*tag*/ ctx[15].style);
-    			add_location(a, file$3, 143, 20, 5157);
+    			add_location(br, file$3, 160, 20, 5860);
+    			attr_dev(a, "href", /*value*/ ctx[20]);
+    			attr_dev(a, "class", "card-link badge badge-light");
+    			attr_dev(a, "target", "_blank");
+    			add_location(a, file$3, 160, 26, 5866);
     		},
     		m: function mount(target, anchor) {
+    			insert_dev(target, br, anchor);
     			insert_dev(target, a, anchor);
     			append_dev(a, t);
-
-    			if (!mounted) {
-    				dispose = listen_dev(a, "click", click_handler_3, false, false, false);
-    				mounted = true;
-    			}
     		},
-    		p: function update(new_ctx, dirty) {
-    			ctx = new_ctx;
-    		},
+    		p: noop,
     		d: function destroy(detaching) {
+    			if (detaching) detach_dev(br);
     			if (detaching) detach_dev(a);
-    			mounted = false;
-    			dispose();
     		}
     	};
 
@@ -1413,43 +1623,108 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(142:16) {#each tag.data as incl}",
+    		source: "(159:16) {#each [...Object.entries(source)] as [key, value]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (125:8) {#each tags as tag}
-    function create_each_block$1(ctx) {
-    	let show_if = /*tag*/ ctx[15].data && /*tag*/ ctx[15].data.hasOwnProperty("@id");
-    	let t;
-    	let if_block1_anchor;
-    	let if_block0 = show_if && create_if_block_1$1(ctx);
-    	let if_block1 = /*tag*/ ctx[15].data && /*tag*/ ctx[15].data.length > 0 && create_if_block$1(ctx);
+    // (169:12) {#if source && source.length > 0}
+    function create_if_block_1$1(ctx) {
+    	let each_1_anchor;
+    	let each_value = /*source*/ ctx[5];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
 
     	const block = {
     		c: function create() {
-    			if (if_block0) if_block0.c();
-    			t = space();
-    			if (if_block1) if_block1.c();
-    			if_block1_anchor = empty();
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
     		},
     		m: function mount(target, anchor) {
-    			if (if_block0) if_block0.m(target, anchor);
-    			insert_dev(target, t, anchor);
-    			if (if_block1) if_block1.m(target, anchor);
-    			insert_dev(target, if_block1_anchor, anchor);
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (show_if) if_block0.p(ctx, dirty);
-    			if (/*tag*/ ctx[15].data && /*tag*/ ctx[15].data.length > 0) if_block1.p(ctx, dirty);
+    			if (dirty[0] & /*source*/ 32) {
+    				each_value = /*source*/ ctx[5];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
     		},
     		d: function destroy(detaching) {
-    			if (if_block0) if_block0.d(detaching);
-    			if (detaching) detach_dev(t);
-    			if (if_block1) if_block1.d(detaching);
-    			if (detaching) detach_dev(if_block1_anchor);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(169:12) {#if source && source.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (171:16) {#each source as incl}
+    function create_each_block$1(ctx) {
+    	let br;
+    	let a;
+    	let t_value = /*incl*/ ctx[16]["@id"] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			br = element("br");
+    			a = element("a");
+    			t = text(t_value);
+    			add_location(br, file$3, 172, 20, 6302);
+    			attr_dev(a, "href", /*incl*/ ctx[16]["@id"]);
+    			attr_dev(a, "target", "_blank");
+    			attr_dev(a, "class", "card-link badge badge-light");
+    			add_location(a, file$3, 172, 26, 6308);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, br, anchor);
+    			insert_dev(target, a, anchor);
+    			append_dev(a, t);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(br);
+    			if (detaching) detach_dev(a);
     		}
     	};
 
@@ -1457,7 +1732,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(125:8) {#each tags as tag}",
+    		source: "(171:16) {#each source as incl}",
     		ctx
     	});
 
@@ -1478,22 +1753,25 @@ var app = (function () {
     	let p;
     	let t4;
     	let t5;
+    	let t6;
 
     	function select_block_type(ctx, dirty) {
-    		if (Array.isArray(/*comments*/ ctx[4])) return create_if_block_3;
+    		if (Array.isArray(/*comments*/ ctx[4])) return create_if_block_6;
     		return create_else_block;
     	}
 
     	let current_block_type = select_block_type(ctx);
     	let if_block0 = current_block_type(ctx);
-    	let if_block1 = /*links*/ ctx[3] && create_if_block_2(ctx);
-    	let each_value = /*tags*/ ctx[2];
-    	validate_each_argument(each_value);
+    	let if_block1 = /*links*/ ctx[3] && create_if_block_5(ctx);
+    	let each_value_2 = /*tags*/ ctx[2];
+    	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
     	}
+
+    	let if_block2 = /*source*/ ctx[5] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1515,19 +1793,21 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
+    			t6 = space();
+    			if (if_block2) if_block2.c();
     			attr_dev(h5, "class", "card-title");
-    			add_location(h5, file$3, 92, 8, 3002);
+    			add_location(h5, file$3, 93, 8, 3049);
     			attr_dev(h6, "class", "card-subtitle mb-2 text-muted");
-    			add_location(h6, file$3, 93, 8, 3079);
+    			add_location(h6, file$3, 94, 8, 3126);
     			attr_dev(p, "class", "card-text");
-    			add_location(p, file$3, 96, 8, 3194);
+    			add_location(p, file$3, 97, 8, 3241);
     			attr_dev(div0, "class", "card-body");
-    			add_location(div0, file$3, 91, 4, 2969);
+    			add_location(div0, file$3, 92, 4, 3016);
     			attr_dev(div1, "class", "card");
     			set_style(div1, "width", "max-width: 310px");
     			set_style(div1, "margin", "0.25em 0");
     			set_style(div1, "word-wrap", "break-word");
-    			add_location(div1, file$3, 87, 0, 2859);
+    			add_location(div1, file$3, 88, 0, 2906);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1550,27 +1830,30 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div0, null);
     			}
+
+    			append_dev(div0, t6);
+    			if (if_block2) if_block2.m(div0, null);
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data_dev(t0, t0_value);
-    			if (dirty & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data_dev(t2, t2_value);
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*hit*/ 2 && t0_value !== (t0_value = formatTitle(/*hit*/ ctx[1].record["rdfs:label"]) + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*hit*/ 2 && t2_value !== (t2_value = parseSchema(/*hit*/ ctx[1].record["@type"]) + "")) set_data_dev(t2, t2_value);
     			if_block0.p(ctx, dirty);
     			if (/*links*/ ctx[3]) if_block1.p(ctx, dirty);
 
-    			if (dirty & /*tags, window, input, formatTitle, parseSchema, Object*/ 5) {
-    				each_value = /*tags*/ ctx[2];
-    				validate_each_argument(each_value);
+    			if (dirty[0] & /*tags, input*/ 5) {
+    				each_value_2 = /*tags*/ ctx[2];
+    				validate_each_argument(each_value_2);
     				let i;
 
-    				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$1(ctx, each_value, i);
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div0, null);
+    						each_blocks[i].m(div0, t6);
     					}
     				}
 
@@ -1578,8 +1861,10 @@ var app = (function () {
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value.length;
+    				each_blocks.length = each_value_2.length;
     			}
+
+    			if (/*source*/ ctx[5]) if_block2.p(ctx, dirty);
     		},
     		i: noop,
     		o: noop,
@@ -1588,6 +1873,7 @@ var app = (function () {
     			if_block0.d();
     			if (if_block1) if_block1.d();
     			destroy_each(each_blocks, detaching);
+    			if (if_block2) if_block2.d();
     		}
     	};
 
@@ -1640,6 +1926,7 @@ var app = (function () {
     	let subClassOf = hit.record["rdfs:subClassOf"];
     	let supersededBy = hit.record["schema:supersededBy"];
     	let subPropertyOf = hit.record["rdfs:subPropertyOf"];
+    	let source = hit.record["schema:source"];
 
     	const tags = [
     		{
@@ -1705,6 +1992,7 @@ var app = (function () {
     		subClassOf,
     		supersededBy,
     		subPropertyOf,
+    		source,
     		tags,
     		formatTitle,
     		parseSchema,
@@ -1721,6 +2009,7 @@ var app = (function () {
     		if ("subClassOf" in $$props) subClassOf = $$props.subClassOf;
     		if ("supersededBy" in $$props) supersededBy = $$props.supersededBy;
     		if ("subPropertyOf" in $$props) subPropertyOf = $$props.subPropertyOf;
+    		if ("source" in $$props) $$invalidate(5, source = $$props.source);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1733,6 +2022,7 @@ var app = (function () {
     		tags,
     		links,
     		comments,
+    		source,
     		click_handler,
     		click_handler_1,
     		click_handler_2,
@@ -1743,7 +2033,7 @@ var app = (function () {
     class ListItem extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { hit: 1, input: 0, tags: 2 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { hit: 1, input: 0, tags: 2 }, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -41855,6 +42145,8 @@ var app = (function () {
     	let a4;
     	let t10;
     	let a5;
+    	let t12;
+    	let a6;
 
     	const block = {
     		c: function create() {
@@ -41876,6 +42168,9 @@ var app = (function () {
     			t10 = space();
     			a5 = element("a");
     			a5.textContent = "Sub-Property Of";
+    			t12 = space();
+    			a6 = element("a");
+    			a6.textContent = "Source";
     			attr_dev(a0, "class", "badge badge-primary text-light");
     			add_location(a0, file$1, 1, 8, 55);
     			attr_dev(a1, "class", "badge badge-secondary text-light");
@@ -41888,6 +42183,8 @@ var app = (function () {
     			add_location(a4, file$1, 9, 0, 472);
     			attr_dev(a5, "class", "badge badge-info");
     			add_location(a5, file$1, 11, 0, 568);
+    			attr_dev(a6, "class", "badge badge-light");
+    			add_location(a6, file$1, 13, 0, 664);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -41905,6 +42202,8 @@ var app = (function () {
     			insert_dev(target, a4, anchor);
     			insert_dev(target, t10, anchor);
     			insert_dev(target, a5, anchor);
+    			insert_dev(target, t12, anchor);
+    			insert_dev(target, a6, anchor);
     		},
     		p: noop,
     		i: noop,
@@ -41922,6 +42221,8 @@ var app = (function () {
     			if (detaching) detach_dev(a4);
     			if (detaching) detach_dev(t10);
     			if (detaching) detach_dev(a5);
+    			if (detaching) detach_dev(t12);
+    			if (detaching) detach_dev(a6);
     		}
     	};
 
